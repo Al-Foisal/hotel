@@ -33,6 +33,15 @@ function menuList()
 
         ],
         [
+            'sideIcon'   => 'home',
+            'title'      => 'System User',
+            'link'       => route('systemUser.index'),
+            'hasSub'     => false,
+            'subMenu'    => [],
+            'permission' => 'System_User',
+
+        ],
+        [
             'sideIcon'   => 'thermometer',
             'title'      => 'Demo',
             'link'       => '',
@@ -64,6 +73,7 @@ function findMenu($targetArray)
     }
     return false;
 }
+
 function findSub($menu, $sub)
 {
     if (session('owner_id') == session('auth_id')) {

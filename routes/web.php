@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SystemUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
