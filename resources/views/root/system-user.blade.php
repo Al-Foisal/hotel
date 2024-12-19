@@ -138,7 +138,7 @@
                                                                 <div class="card">
                                                                     <div class="card-body">
                                                                         <div class="mb-3">
-                                                                            
+
                                                                             @foreach(menuList() as $m=>$menu)
                                                                             @if($menu['title']!=='System User')
                                                                             <div class="form-check">
@@ -191,7 +191,7 @@
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
-                                                                            @endif                
+                                                                            @endif
                                                                             @endforeach
                                                                         </div>
                                                                     </div>
