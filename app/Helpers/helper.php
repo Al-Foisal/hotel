@@ -43,16 +43,28 @@ function menuList()
         ],
         [
             'sideIcon'   => 'thermometer',
-            'title'      => 'Demo',
+            'title'      => 'Room Reservation Setting',
             'link'       => '',
             'hasSub'     => true,
-            'permission' => 'OT',
+            'permission' => 'Room_Reservation_Setting',
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Operation',
-                    'link'       => '',
-                    'permission' => 'Operation',
+                    'title'      => 'Room Type',
+                    'link'       => route('rrs.roomType.index'),
+                    'permission' => 'Room_Type',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Bed Type',
+                    'link'       => route('rrs.bedType.index'),
+                    'permission' => 'Bed_Type',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Floor',
+                    'link'       => route('rrs.floor.index'),
+                    'permission' => 'Bed_Type',
                 ],
             ],
 

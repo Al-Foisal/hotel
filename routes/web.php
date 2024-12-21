@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BedTypeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FloorController;
+use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SystemUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,17 +21,21 @@ Route::controller(AuthController::class)->middleware('guest')->group(function ()
 });
 
 Route::middleware('auth')->group(function () {
-    Route::controller(BranchController::class)->prefix('/branches')->name('branch.')->group(function () {
+    Route::controller(RoomTypeController::class)->prefix('/rrs/room-types')->name('rrs.roomType.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
-        Route::post('/status/{id}', 'status')->name('status');
     });
-    Route::controller(RoleController::class)->prefix('/roles')->name('role.')->group(function () {
+    Route::controller(BedTypeController::class)->prefix('/rrs/bed-types')->name('rrs.bedType.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
-        Route::post('/status/{id}', 'status')->name('status');
+    });
+    Route::controller(FloorController::class)->prefix('/rrs/floors')->name('rrs.floor.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
     Route::controller(SystemUserController::class)->prefix('/system-user')->name('systemUser.')->group(function () {
         Route::get('/', 'index')->name('index');
