@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BedTypeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SystemUserController;
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
     });
+    
     Route::controller(FloorController::class)->prefix('/rrs/floors')->name('rrs.floor.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
@@ -45,6 +47,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete/{id}', 'delete')->name('delete');
         Route::post('/rootStatus/{id}', 'rootStatus')->name('rootStatus');
         Route::post('/deleteRootUser/{id}', 'deleteRootUser')->name('deleteRootUser');
+    });
+    Route::controller(FacilityController::class)->prefix('/rrs/facilities')->name('rrs.facility.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
     });
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;

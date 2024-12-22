@@ -66,6 +66,12 @@ function menuList()
                     'link'       => route('rrs.floor.index'),
                     'permission' => 'Bed_Type',
                 ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Facility',
+                    'link'       => route('rrs.facility.index'),
+                    'permission' => 'Facility',
+                ],
             ],
 
         ],
