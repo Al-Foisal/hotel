@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Traits\GlobalOwnerIdentityScopeTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomOrApartmet extends Model
+class RoomFacility extends Model
 {
     use GlobalOwnerIdentityScopeTrait;
-    protected $guarded = [];
+    protected $guarded=[];
 }

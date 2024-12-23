@@ -35,6 +35,7 @@ class FacilityController extends Controller
 
         try {
             $user = Facility::create([
+                'icon' => $request->icon,
                 'name' => ucwords($request->name),
             ]);
 
@@ -66,6 +67,7 @@ class FacilityController extends Controller
             }
 
             $item->update([
+                'icon' => $request->icon,
                 'name' => $request->name,
             ]);
 

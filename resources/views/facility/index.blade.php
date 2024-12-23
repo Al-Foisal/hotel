@@ -50,6 +50,7 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
+                            <th>Icon [ <a href="https://fontawesome.com/v5/search">Goto Icon Store</a> ]</th>
                             <th>Facility</th>
                             <th class="d-none">Action</th>
                         </tr>
@@ -58,6 +59,7 @@
                         @foreach($items as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
+                            <td><i class="{{$item->icon}}"></i> [{{$item->icon}}]</td>
                             <td>{{$item->name}}</td>
                             <td class="d-none">
                                 <div class="d-flex justify-content-start">
@@ -78,7 +80,11 @@
                                                 <form action="{{route('rrs.facility.update',$item->id)}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="row">
-                                                        <div class="col-md-12 mb-3">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label class="form-label" for="exampleInputEmail1">Icon</label>
+                                                            <input type="text" class="form-control" placeholder="Enter icon class" name="icon" value="{{$item->icon??''}}">
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
                                                             <label class="form-label" for="exampleInputEmail1">Facility</label>
                                                             <input type="text" class="form-control" placeholder="Enter facility" name="name" required value="{{$item->name??''}}">
                                                         </div>
@@ -111,7 +117,11 @@
                 <form action="{{route('rrs.facility.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="exampleInputEmail1">Icon</label>
+                            <input type="text" class="form-control" placeholder="Enter icon class" name="icon">
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label class="form-label" for="exampleInputEmail1">Facility*</label>
                             <input type="text" class="form-control" placeholder="Enter facility" name="name" required>
                         </div>
