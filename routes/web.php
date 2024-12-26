@@ -5,6 +5,7 @@ use App\Http\Controllers\BedTypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
+use App\Http\Controllers\RoomOrApartmentController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SystemUserController;
 use Illuminate\Http\Request;
@@ -52,6 +53,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
+    });
+    Route::controller(RoomOrApartmentController::class)->prefix('/rrs/room-or-apartment')->name('rrs.roa.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/status/{id}', 'status')->name('status');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;

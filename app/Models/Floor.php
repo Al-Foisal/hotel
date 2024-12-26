@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Floor extends Model
 {
     use GlobalOwnerIdentityScopeTrait;
-    protected $guarded=[];
+    protected $guarded = [];
     public static function boot()
     {
         parent::boot();
@@ -16,5 +16,10 @@ class Floor extends Model
         self::creating(function ($model) {
             $model->owner_id = session('owner_id');
         });
+    }
+
+    public function roa()
+    {
+        return $this->hasMany(RoomOrApartmet::class);
     }
 }

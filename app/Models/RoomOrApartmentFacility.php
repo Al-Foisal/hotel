@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\GlobalOwnerIdentityScopeTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomOrApartmet extends Model
+class RoomOrApartmentFacility extends Model
 {
     use GlobalOwnerIdentityScopeTrait;
     protected $guarded = [];
@@ -18,12 +18,9 @@ class RoomOrApartmet extends Model
             $model->owner_id = session('owner_id');
         });
     }
-    public function roomType()
+
+    public function facility()
     {
-        return $this->belongsTo(RoomType::class);
-    }
-    public function facilities()
-    {
-        return $this->hasMany(RoomOrApartmentFacility::class, 'room_or_apartment_id', 'id');
+        return $this->belongsTo(Facility::class);
     }
 }

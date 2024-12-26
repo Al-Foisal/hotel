@@ -72,6 +72,12 @@ function menuList()
                     'link'       => route('rrs.facility.index'),
                     'permission' => 'Facility',
                 ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Room or Apartment',
+                    'link'       => route('rrs.roa.index'),
+                    'permission' => 'Room_or_Apartment',
+                ],
             ],
 
         ],
@@ -108,4 +114,13 @@ function findSub($menu, $sub)
         return false;
     }
     return false;
+}
+
+function isOperator()
+{
+    if (auth()->user()->responsibility === 'Operator') {
+        return true;
+    } else {
+        return false;
+    }
 }

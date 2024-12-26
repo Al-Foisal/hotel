@@ -74,7 +74,7 @@
                             Owner Account
                             @else
                             <div class="d-flex justify-content-start">
-                                <button href="" class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#editSystemUserModal{{$up->id}}">Edit</button>
+                                <button href="" class="btn btn-primary me-1" data-bs-toggle="modal" data-bs-target="#editSystemUserModal{{$up->id}}">Edit</button>
                                 <form action="{{route('systemUser.rootStatus',$up->id)}}" method="post">
                                     @csrf
                                     <button type="submit" class="btn btn-outline-{{$up->status==1?'danger':'success'}} me-1" onclick="return confirm('Are you sure want {{$up->status==1?'Inactive':'Active'}} this user?')">{{$up->status==1?'Inactive':'Active'}}</button>

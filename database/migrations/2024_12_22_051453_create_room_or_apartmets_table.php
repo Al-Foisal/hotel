@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('capacity')->nullable();
             $table->string('diameter')->nullable();
             $table->string('wifi_password')->nullable();
+            $table->string('image')->nullable();
             $table->text('note')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->unsignedBigInteger('owner_id');
             $table->timestamps();
         });
