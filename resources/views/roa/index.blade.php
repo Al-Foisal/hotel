@@ -95,7 +95,7 @@
                             <td>
                                 <a href="{{route('rrs.roa.edit',$detail->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <br>
                                 <form action="{{route('rrs.roa.status',$detail->id)}}" method="post">
-                                    @csrf
+                                    @csrf 
                                     <button type="submit" class="btn btn-{{$detail->status==1?'danger':'success'}} btn-sm mb-1" onclick="return confirm('Are you sure want {{$detail->status==1?'Inactive':'Active'}} this item?')">{{$detail->status==1?'Inactive':'Active'}}</button>
                                 </form>
                                 <form action="{{route('rrs.roa.delete',$detail->id)}}" method="post">
