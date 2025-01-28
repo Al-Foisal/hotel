@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomOrApartmentController;
+use App\Http\Controllers\RoomReservationController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SystemUserController;
 use Illuminate\Http\Request;
@@ -62,6 +63,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/status/{id}', 'status')->name('status');
         Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(RoomReservationController::class)->prefix('/room-reservation')->name('roomReservation')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+        Route::get('/edit/{id}','edit')->name('edit');
+        Route::post('/update/{id}','update')->name('update');
+        
+        Route::get('/room-reservation-status','roomReservationStatus')->name('roomReservationStatus');
     });
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;
