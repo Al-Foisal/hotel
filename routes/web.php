@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BedTypeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
@@ -34,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
     });
-    
+
     Route::controller(FloorController::class)->prefix('/rrs/floors')->name('rrs.floor.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
@@ -64,14 +65,22 @@ Route::middleware('auth')->group(function () {
         Route::post('/status/{id}', 'status')->name('status');
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
-    Route::controller(RoomReservationController::class)->prefix('/room-reservation')->name('roomReservation')->group(function(){
-        Route::get('/','index')->name('index');
-        Route::get('/create','create')->name('create');
-        Route::post('/store','store')->name('store');
-        Route::get('/edit/{id}','edit')->name('edit');
-        Route::post('/update/{id}','update')->name('update');
-        
-        Route::get('/room-reservation-status','roomReservationStatus')->name('roomReservationStatus');
+    Route::controller(CustomerController::class)->prefix('/customer')->name('customer.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(RoomReservationController::class)->prefix('/room-reservation')->name('roomReservation')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+
+        Route::get('/room-reservation-status', 'roomReservationStatus')->name('roomReservationStatus');
     });
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;

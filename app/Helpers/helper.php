@@ -42,6 +42,15 @@ function menuList()
 
         ],
         [
+            'sideIcon'   => 'home',
+            'title'      => 'Customer',
+            'link'       => route('customer.index'),
+            'hasSub'     => false,
+            'subMenu'    => [],
+            'permission' => 'Customer',
+
+        ],
+        [
             'sideIcon'   => 'thermometer',
             'title'      => 'Room Reservation Setting',
             'link'       => '',
