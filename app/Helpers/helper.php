@@ -52,6 +52,22 @@ function menuList()
         ],
         [
             'sideIcon'   => 'thermometer',
+            'title'      => 'Room Reservation',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Room_Reservation',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Check In',
+                    'link'       => route('roomReservation.create'),
+                    'permission' => 'Check_In',
+                ],
+            ],
+
+        ],
+        [
+            'sideIcon'   => 'thermometer',
             'title'      => 'Room Reservation Setting',
             'link'       => '',
             'hasSub'     => true,
