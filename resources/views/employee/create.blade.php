@@ -32,7 +32,7 @@
             </div>
         </div><!--end card-header-->
         <div class="card-body">
-            <form action="{{route('rrs.roa.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('rrs.emp.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
 
@@ -172,20 +172,20 @@
                                 <div class="row">
                                   <div class="col-md-4 col-sm-12">
                                     <div class="form-group">
-                                      <label class="form-label" >Name </label>
-                                      <input type="text"   class="form-control" id="emergency_contact_name_one" name="emergency_contact_name_one">
+                                      <label class="form-label" >Name <small style="color: red">*</small></label>
+                                      <input type="text" required  class="form-control" id="emergency_contact_name_one" name="emergency_contact_name_one">
                                     </div>
                                   </div>
                                 <div class="col-md-4 col-sm-12">
                                   <div class="form-group">
-                                    <label class="form-label" >Number </label>
-                                    <input type="text"  class="form-control" id="emergency_contact_number_one" name="emergency_contact_number_one">
+                                    <label class="form-label" >Number <small style="color: red">*</small></label>
+                                    <input type="text" required class="form-control" id="emergency_contact_number_one" name="emergency_contact_number_one">
                                   </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
                                   <div class="form-group">
-                                    <label class="form-label" >Relation </label>
-                                    <input type="text"  class="form-control" id="emergency_contact_relation_one" name="emergency_contact_relation_one">
+                                    <label class="form-label" >Relation <small style="color: red">*</small></label>
+                                    <input type="text" required class="form-control" id="emergency_contact_relation_one" name="emergency_contact_relation_one">
                                   </div>
                                 </div>
                                </div>
@@ -195,20 +195,20 @@
                                <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                   <div class="form-group">
-                                    <label class="form-label" >Name </label>
-                                    <input type="text"   class="form-control" id="emergency_contact_name_two" name="emergency_contact_name_two">
+                                    <label class="form-label" >Name <small style="color: red">*</small></label>
+                                    <input type="text" required  class="form-control" id="emergency_contact_name_two" name="emergency_contact_name_two">
                                   </div>
                                 </div>
                               <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                  <label class="form-label" >Number </label>
-                                  <input type="text"  class="form-control" id="emergency_contact_number_two" name="emergency_contact_number_two">
+                                  <label class="form-label" >Number <small style="color: red">*</small></label>
+                                  <input type="text" required class="form-control" id="emergency_contact_number_two" name="emergency_contact_number_two">
                                 </div>
                               </div>
                               <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                  <label class="form-label" >Relation</label>
-                                  <input type="text" class="form-control" id="emergency_contact_relation_two" name="emergency_contact_relation_two">
+                                  <label class="form-label" >Relation <small style="color: red">*</small></label>
+                                  <input type="text" required class="form-control" id="emergency_contact_relation_two" name="emergency_contact_relation_two">
                                 </div>
                               </div>
                              </div>

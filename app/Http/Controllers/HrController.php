@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class HrController extends Controller
@@ -51,11 +52,16 @@ class HrController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'type' => 'required',
-            'room_type_id' => 'required',
-            'floor_id' => 'required',
-            'room_number' => 'required',
-            'price' => 'required',
+            'full_name' => 'required',
+            'designation_id' => 'required',
+            'joining_date' => 'required',
+            'monthly_salary' => 'required',
+            'emergency_contact_name_one' => 'required',
+            'emergency_contact_number_one' => 'required',
+            'emergency_contact_relation_one' => 'required',
+            'emergency_contact_name_two' => 'required',
+            'emergency_contact_number_two' => 'required',
+            'emergency_contact_relation_two' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -63,36 +69,46 @@ class HrController extends Controller
         }
 
         DB::beginTransaction();
-
         try {
 
             $image = null;
             if ($request->hasFile('image')) {
                 $file_name = $request->file('image');
-                $image = uploadImage('roa', $file_name);
+                $image = uploadImage('emp', $file_name);
             }
 
-            $data = RoomOrApartmet::create([
-                'type' => $request->type,
-                'room_type_id' => $request->room_type_id,
-                'floor_id' => $request->floor_id,
-                'room_number' => $request->room_number,
-                'price' => $request->price,
-                'capacity' => $request->capacity,
-                'diameter' => $request->diameter,
-                'wifi_password' => $request->wifi_password,
-                'image' => $image,
-                'note' => $request->note,
-            ]);
+            $owner_id = Auth::user()->id;
+            $employee = DB::table('employees')
+                                ->insertGetId([
+                                'owner_id'=>$owner_id,
+                                'designation_id'=>$request->designation_id,
+                                'joining_date'=>$request->joining_date,
+                                'monthly_salary'=>$request->monthly_salary,
+                                'profile_pic'=>$image,
+                                'full_name'=>ucwords($request->full_name),
+                                'father_name'=>ucwords($request->father_name),
+                                'mother_name'=>ucwords($request->mother_name),
+                                'mobile_number'=>$request->mobile_number,
+                                'nid_number'=>$request->nid_number,
+                                'present_address'=>$request->present_address,
+                                'permanent_address'=>$request->permanent_address,
+                                'birth_date'=>$request->birth_date,
+                                'blood_group'=>$request->blood_group,
+                                'nationality'=>$request->nationality,
+                                'marital_status'=>$request->marital_status,
+                                'religion'=>$request->religion,
+                                'gender'=>$request->gender,
+                                'emergency_contact_name_one'=>ucwords($request->emergency_contact_name_one),
+                                'emergency_contact_number_one'=>$request->emergency_contact_number_one,
+                                'emergency_contact_relation_one'=>$request->emergency_contact_relation_one,
+                                'emergency_contact_name_two'=>ucwords($request->emergency_contact_name_two),
+                                'emergency_contact_number_two'=>$request->emergency_contact_number_two,
+                                'emergency_contact_relation_two'=>$request->emergency_contact_relation_two,
+                                'emergency_contact_name_three'=>ucwords($request->emergency_contact_name_three),
+                                'emergency_contact_number_three'=>$request->emergency_contact_number_three,
+                                'emergency_contact_relation_three'=>$request->emergency_contact_relation_three
+                                ]);
 
-            if ($request->facility_id != null) {
-                foreach ($request->facility_id as $facility) {
-                    RoomOrApartmentFacility::create([
-                        'room_or_apartment_id' => $data->id,
-                        'facility_id' => $facility
-                    ]);
-                }
-            }
             DB::commit();
             return back()->withToastSuccess('Data created successfully');
         } catch (\Throwable $th) {

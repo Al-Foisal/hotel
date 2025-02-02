@@ -72,7 +72,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>
-                                <img src="" alt="image" style="height:60px "><br>
+                                <img src="{{asset($item->profile_pic??'hotel.png')}}" alt="image" style="height:60px "><br>
                                 <b>{{$item->full_name}}</b><br>
                             </td>
                             <td>
