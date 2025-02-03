@@ -72,7 +72,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>
-                                <img src="{{asset($item->profile_pic??'hotel.png')}}" alt="image" style="height:60px "><br>
+                                <img src="{{asset($item->profile_pic??'user.jpg')}}" alt="image" style="height:60px "><br>
                                 <b>{{$item->full_name}}</b><br>
                             </td>
                             <td>
@@ -96,7 +96,7 @@
 
             
                             <td>
-                                <a href="{{route('rrs.roa.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <br>
+                                <a href="{{route('rrs.emp.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <br>
                                 
                                 <form action="{{route('rrs.roa.delete',$item->id)}}" method="post">
                                     @csrf

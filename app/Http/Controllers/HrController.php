@@ -117,4 +117,12 @@ class HrController extends Controller
         }
     }
 
+    public function edit($id){
+        $item = DB::table('employees')->where('id',$id)->first();
+
+        $owner_id = Auth::user()->id;
+        $designations = DB::table('designations')->where('owner_id', $owner_id)->get();
+        return view('employee.edit',compact('item','designations'));
+    }
+
 }

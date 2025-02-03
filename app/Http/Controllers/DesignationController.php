@@ -12,7 +12,7 @@ class DesignationController extends Controller
     public function index(Request $request){
       
         $owner_id = Auth::user()->id;
-        $query = DB::table('designations')->where('owner_id', $owner_id);;
+        $query = DB::table('designations')->where('owner_id', $owner_id);
 
         if ($request->has('q')) {
             $search = '%' . $request->q . '%';
