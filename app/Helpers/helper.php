@@ -81,6 +81,65 @@ function menuList()
             ],
 
         ],
+
+        [
+            'sideIcon'   => 'thermometer',
+            'title'      => 'Inventory Setting',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Inventory_Setting',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Supplier',
+                    'link'       => route('rrs.supplier.index'),
+                    'permission' => 'Room_Type',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Supplier Payment',
+                    'link'       => route('rrs.supplier-payment.index'),
+                    'permission' => 'Bed_Type',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Product Category',
+                    'link'       => route('rrs.product-category.index'),
+                    'permission' => 'Bed_Type',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Product',
+                    'link'       => route('rrs.product.index'),
+                    'permission' => 'Facility',
+                ],
+            ],
+
+        ],
+
+        [
+            'sideIcon'   => 'thermometer',
+            'title'      => 'Inventory Management',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Inventory_Management',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Purchase',
+                    'link'       => route('rrs.purchase.index'),
+                    'permission' => 'Room_Type',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Stock',
+                    'link'       => route('rrs.stock.index'),
+                    'permission' => 'Bed_Type',
+                ],
+            ],
+
+        ],
+
     ];
 }
 
