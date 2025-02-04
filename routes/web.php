@@ -81,6 +81,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', 'update')->name('update');
 
         Route::get('/room-reservation-status', 'roomReservationStatus')->name('roomReservationStatus');
+        Route::post('/get-roa-by-type', 'getROAByType')->name('getROAByType');
+        Route::post('/get-single-room-details', 'getSingleRoomDetails')->name('getSingleRoomDetails');
     });
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;

@@ -8,6 +8,7 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('favicon.png')}}">
@@ -95,10 +96,17 @@
 
     <script src="{{asset('plugins/select2/select2.min.js')}}"></script>
     <script src="{{asset('pages/jquery.forms-advanced.js')}}"></script>
-   
+
     <!-- App js -->
     <script src="{{asset('js/app.js')}}"></script>
 
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('js')
 </body>
 
