@@ -125,4 +125,50 @@ class HrController extends Controller
         return view('employee.edit',compact('item','designations'));
     }
 
+    public function update(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $data = $request->only([
+                'full_name', 'designation_id', 'joining_date', 'monthly_salary', 'father_name',
+                'mother_name', 'mobile_number', 'nid_number', 'present_address', 'permanent_address',
+                'birth_date', 'blood_group', 'nationality', 'marital_status', 'religion', 'gender',
+                'emergency_contact_name_one', 'emergency_contact_number_one', 'emergency_contact_relation_one',
+                'emergency_contact_name_two', 'emergency_contact_number_two', 'emergency_contact_relation_two',
+                'emergency_contact_name_three', 'emergency_contact_number_three', 'emergency_contact_relation_three'
+            ]);
+    
+            if ($request->hasFile('image')) {
+                $employee = DB::table('employees')->where('id', $id)->first();
+                if ($employee && !empty($employee->profile_pic)) {
+                    $filePath = public_path($employee->profile_pic);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+                $data['profile_pic'] = uploadImage('emp', $request->file('image'));
+            }
+    
+            DB::table('employees')->where('id', $id)->update($data);
+            DB::commit();
+    
+            return to_route('rrs.emp.index')->withToastSuccess('Data updated successfully');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withToastError($th->getMessage());
+        }
+    }
+    
+    public function delete(Request $request, $id)
+    {
+        $data = DB::table('employees')->where('id', $id)->first();
+
+        if (!$data) {
+            return back()->withToastError('No data found');
+        }
+       
+         DB::table('employees')->where('id', $id)->delete();
+
+        return back()->withToastSuccess('Data deleted successfully');
+    }
 }

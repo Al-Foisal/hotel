@@ -98,7 +98,7 @@
                             <td>
                                 <a href="{{route('rrs.emp.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <br>
                                 
-                                <form action="{{route('rrs.roa.delete',$item->id)}}" method="post">
+                                <form action="{{route('rrs.emp.delete',$item->id)}}" method="post">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want delete this item?')">Delete</button>
                                 </form>

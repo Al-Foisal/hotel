@@ -103,7 +103,7 @@ function menuList()
                 [
                     'sideIcon'   => '',
                     'title'      => 'Payroll',
-                    'link'       => route('rrs.floor.index'),
+                    'link'       => route('rrs.payroll.index'),
                     'permission' => 'Payroll',
                 ],
         

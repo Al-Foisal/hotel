@@ -34,7 +34,7 @@
         <div class="card-body">
             <img src="{{asset($item->profile_pic??'user.jpg')}}" alt="image" style="height:200px ">
             
-            <form action="{{route('rrs.emp.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('rrs.emp.update',$item->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="roa_id" value="{{$item->id}}">
                 <br>

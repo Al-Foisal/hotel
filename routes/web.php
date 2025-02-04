@@ -10,6 +10,7 @@ use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SystemUserController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\HrController;
+use App\Http\Controllers\PayrollController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +69,8 @@ Route::middleware('auth')->group(function () {
 
 
     //----------- HR (start)-------------------
+
+    //designation
     Route::controller(DesignationController::class)->prefix('/rrs/designation')->name('rrs.desg.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
@@ -75,15 +78,27 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
 
+    //employee
     Route::controller(HrController::class)->prefix('/rrs/employee')->name('rrs.emp.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
-        // Route::post('/update/{id}', 'update')->name('update');
-        // Route::post('/status/{id}', 'status')->name('status');
-        // Route::post('/delete/{id}', 'delete')->name('delete');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
+
+    //payroll
+    Route::controller(PayrollController::class)->prefix('/rrs/payroll')->name('rrs.payroll.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::get('/fdg',[PayrollController::class,'test'])->name('payroll_show_data');
     //----------- HR (end)-------------------
 
     
