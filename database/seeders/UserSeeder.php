@@ -5,25 +5,20 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-class UsersTableSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         DB::table('users')->insert([
             [
-                'id' => 1,
-                'name' => 'Admin User',
+                'name' => 'Super Admin',
                 'email' => 'ossl@gmail.com',
-                'email_verified_at' => now(),
                 'password' => Hash::make('123456789'),
-                'remember_token' => Str::random(10),
+                'owner_id' => 1, // Assuming 1 is the ID of the super admin owner
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
