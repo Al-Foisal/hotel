@@ -47,40 +47,40 @@
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Check In*</label>
-                    <input type="date" class="form-control" id="rCheckIn">
+                    <input type="date" class="form-control" id="rCheckIn" value="{{date('Y-m-d')}}">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Check Out*</label>
-                    <input type="date" class="form-control" id="rCheckOut">
+                    <input type="date" class="form-control" id="rCheckOut" value="{{date('Y-m-d')}}">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Arival From</label>
-                    <input type="text" class="form-control" id="rArivalFrom">
+                    <input type="text" class="form-control" id="rArivalFrom" value="Dhaka">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Booking Type</label>
                     <select id="rBookingType" class="select2">
                         <option value="">select option</option>
                         <option value="Group">Group</option>
-                        <option value="Business Seminar">Business Seminar</option>
+                        <option value="Business Seminar" selected>Business Seminar</option>
                         <option value="Single Allocation">Single Allocation</option>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Booking Reference</label>
-                    <input type="text" class="form-control" id="rBookingReference" placeholder="Enter booking reference">
+                    <input type="text" class="form-control" id="rBookingReference" placeholder="Enter booking reference" value="Mr. Abdul Kalam">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Booking Reference Number</label>
-                    <input type="text" class="form-control" id="rBookingReferenceNumber" placeholder="Enter booking reference number">
+                    <input type="text" class="form-control" id="rBookingReferenceNumber" placeholder="Enter booking reference number" value="we202502">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Purpose of Visit</label>
-                    <input type="text" class="form-control" id="rPurposeOfVisit" placeholder="Purpose of visit">
+                    <input type="text" class="form-control" id="rPurposeOfVisit" placeholder="Purpose of visit" value="Make money">
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Remarks</label>
-                    <input type="text" class="form-control" id="rRemarks" placeholder="Remarks">
+                    <input type="text" class="form-control" id="rRemarks" placeholder="Remarks" value="collect money as many as you can. collect money as many as you can. collect money as many as you can.">
                 </div>
             </div>
         </div><!--end card-body-->
@@ -116,13 +116,16 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Amount</label>
-                    <input type="number" class="form-control rPrice" placeholder="0" readonly>
+                    <input type="number" class="form-control rPrice" placeholder="0">
                 </div>
                 <div class="col-md-1 mb-3">
                     <button type="button" class="btn btn-info" onclick="addAnotherRoom(this)" style="margin-top: 1.7rem;">+</button>
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        Total Price: <span id="total">0.00</span>
     </div>
     <div class="card">
         <div class="card-header row">
@@ -134,50 +137,50 @@
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Name*</label>
-                    <input type="text" class="form-control rcName" placeholder="Enter name">
+                    <input type="text" class="form-control " id="rcName" placeholder="Enter name" value="Mr. xyz">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Email*</label>
-                    <input type="text" class="form-control rcEmail" placeholder="Enter email">
+                    <input type="text" class="form-control " id="rcEmail" placeholder="Enter email" value="xyz@gmail.com">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Phone*</label>
-                    <input type="text" class="form-control rcPhone" placeholder="Enter phone">
+                    <input type="text" class="form-control " id="rcPhone" placeholder="Enter phone" value="0147896325">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Country*</label>
-                    <input type="text" class="form-control rcCountry" placeholder="Enter Country">
+                    <input type="text" class="form-control " id="rcCountry" placeholder="Enter Country" value="Bangladesh">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">State*</label>
-                    <input type="text" class="form-control rcState" placeholder="Enter State">
+                    <input type="text" class="form-control " id="rcState" placeholder="Enter State" value="Dhaka">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">City*</label>
-                    <input type="text" class="form-control rcCity" placeholder="Enter City">
+                    <input type="text" class="form-control " id="rcCity" placeholder="Enter City" value="Dhaka">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Gender</label>
-                    <select class="form-control rcGender">
+                    <select class="form-control " id="rcGender">
                         <option value="">select option</option>
-                        <option value="Male">Male</option>
+                        <option value="Male" selected>Male</option>
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Age</label>
-                    <input type="text" class="form-control rcAge" placeholder="Age">
+                    <input type="text" class="form-control " id="rcAge" placeholder="Age" value="55">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Address</label>
-                    <input type="text" class="form-control rcAddress" placeholder="Address">
+                    <input type="text" class="form-control " id="rcAddress" placeholder="Address" value="Police plaza, Gulshan - 1.">
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Type of ID</label>
-                    <select class="form-control rcTypeID">
+                    <select class="form-control " id="rcTypeID">
                         <option value="">select option</option>
-                        <option value="Passport">Passport</option>
+                        <option value="Passport" selected>Passport</option>
                         <option value="Driving License">Driving License</option>
                         <option value="Birth Certificate">Birth Certificate</option>
                         <option value="NID">NID</option>
@@ -185,7 +188,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">ID Number</label>
-                    <input type="text" class="form-control rcIDNumber" placeholder="ID Number">
+                    <input type="text" class="form-control " id="rcIDNumber" placeholder="ID Number" value="BD4578963">
                 </div>
             </div>
         </div>
@@ -241,6 +244,7 @@
         </div>
     </div>
 
+    <button type="button" class="btn btn-primary" style="float: right;" onclick="submitRoomReservation(this)" data-url="{{route('roomReservation.store')}}" id="submitBill" data-bs-toggle="modal" data-bs-target="#billFullScreenModal">Submit</button>
 
     <div class="card">
         <div class="row m-3">
@@ -301,7 +305,7 @@
         </div><!--end col-->
 
         <div class="m-3">
-            <button type="button" class="btn btn-primary" style="float: right;" onclick="submitBill(this)" data-url="" id="submitBill" data-bs-toggle="modal" data-bs-target="#billFullScreenModal">Submit</button>
+            <button type="button" class="btn btn-primary" style="float: right;" onclick="submitRoomReservation(this)" data-url="{{route('roomReservation.store')}}" id="submitBill" data-bs-toggle="modal" data-bs-target="#billFullScreenModal">Submit</button>
         </div>
     </div>
 </div> <!-- end row -->
@@ -343,7 +347,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Amount</label>
-                    <input type="number" class="form-control rPrice" placeholder="0" readonly>
+                    <input type="number" class="form-control rPrice" placeholder="0">
                 </div>
                 <div class="col-md-1 mb-3">
                     <button type="button" class="ibtnDel btn btn-danger del" style="margin-top: 1.8rem;">X</button>
@@ -458,6 +462,207 @@
                 $(e).parent().parent().find(".rAdult").val(data.adult ?? 0);
                 $(e).parent().parent().find(".rChild").val(data.child ?? 0);
                 $(e).parent().parent().find(".rPrice").val(data.price ?? 0);
+
+                updateTotal();
+            },
+        });
+    };
+
+
+    function updateTotal() {
+        let total = 0;
+        $('.rPrice').each(function() {
+            let price = parseFloat($(this).val());
+            if (!isNaN(price)) {
+                total += price;
+            }
+        });
+        $('#total').text(total.toFixed(2));
+        monetaryCalculation(total)
+    }
+
+    var totalBillingAmount = 0;
+    var totalBillingVat = 0;
+    var totalBillingVatAmount = 0;
+    var totalBillingDiscount = 0;
+    var totalBillingDiscountType = 'Flat';
+    var totalBillingDiscountAmount = 0;
+    var totalBillingSubtotal = 0;
+    var totalBillingPaidAmount = 0;
+    var totalBillingDue = 0;
+    var totalBillingChanges = 0;
+
+    function calculateTotalBillingAmount() {
+
+        updateTotal();
+
+    }
+
+    function monetaryCalculation(total) {
+        totalBillingAmount = Number(total);
+
+        //vat calculation
+        totalBillingVat = Number($("#totalBillingVat").val()) ?? 0;
+        totalBillingVatAmount = Math.ceil((totalBillingAmount * totalBillingVat) / 100);
+
+        //discount calculation
+        totalBillingDiscount = Number($("#totalBillingDiscount").val()) ?? 0;
+        totalBillingDiscountType = $("#totalBillingDiscountType").val() ?? 'Flat';
+        if (totalBillingDiscount > 0 && totalBillingDiscountType === 'Flat') {
+            totalBillingDiscountAmount = totalBillingDiscount;
+        } else {
+            totalBillingDiscountAmount = Math.ceil((totalBillingAmount * totalBillingDiscount) / 100);
+        }
+
+
+        totalBillingPaidAmount = Number($("#totalBillingPaidAmount").val()) ?? 0;
+
+        totalBillingSubtotal = totalBillingAmount + Number(totalBillingVatAmount) - Number(totalBillingDiscountAmount);
+        totalBillingDue = (totalBillingSubtotal - totalBillingPaidAmount) > 0 || totalBillingPaidAmount == 0 ? totalBillingSubtotal - totalBillingPaidAmount : 0;
+        totalBillingChanges = (totalBillingPaidAmount - totalBillingSubtotal) > 0 ? totalBillingPaidAmount - totalBillingSubtotal : 0;
+
+        $("#totalBillingAmount").val(totalBillingAmount);
+        $("#totalBillingSubtotal").val(totalBillingSubtotal);
+        $("#totalBillingDue").val(totalBillingDue);
+        $("#totalBillingChanges").val(totalBillingChanges);
+    }
+
+    function submitRoomReservation(e) {
+
+        var url = $(e).data('url');
+
+        //reservation details
+        var rCheckIn = $("#rCheckIn").val();
+        var rCheckOut = $("#rCheckOut").val();
+        var rArivalFrom = $("#rArivalFrom").val();
+        var rBookingType = $("#rBookingType").val();
+        var rBookingReference = $("#rBookingReference").val();
+        var rBookingReferenceNumber = $("#rBookingReferenceNumber").val();
+        var rPurposeOfVisit = $("#rPurposeOfVisit").val();
+        var rRemarks = $("#rRemarks").val();
+
+        var rRemarks = $("#rRemarks").val();
+        var rRemarks = $("#rRemarks").val();
+        var rRemarks = $("#rRemarks").val();
+        var rRemarks = $("#rRemarks").val();
+        var rRemarks = $("#rRemarks").val();
+        var rRemarks = $("#rRemarks").val();
+
+        //room or apartment details
+        var rRoomOrApartmentType = [];
+        var rRoomOrApartmentNumber = [];
+        var rAdult = [];
+        var rChild = [];
+        var rPrice = [];
+
+        $(".rRoomOrApartmentType").each(function(typeIndex) {
+            rRoomOrApartmentType.push($(this).val());
+        });
+        $(".rRoomOrApartmentNumber").each(function(typeIndex) {
+            rRoomOrApartmentNumber.push($(this).val());
+        });
+        $(".rAdult").each(function(typeIndex) {
+            rAdult.push($(this).val());
+        });
+        $(".rChild").each(function(typeIndex) {
+            rChild.push($(this).val());
+        });
+        $(".rPrice").each(function(typeIndex) {
+            rPrice.push($(this).val());
+        });
+
+        //customer info
+        var rcName = $("#rcName").val();
+        var rcEmail = $("#rcEmail").val();
+        var rcPhone = $("#rcPhone").val();
+        var rcCountry = $("#rcCountry").val();
+        var rcState = $("#rcState").val();
+        var rcCity = $("#rcCity").val();
+        var rcGender = $("#rcGender").val();
+        var rcAge = $("#rcAge").val();
+        var rcAddress = $("#rcAddress").val();
+        var rcTypeID = $("#rcTypeID").val();
+        var rcIDNumber = $("#rcIDNumber").val();
+
+        //other person information
+        var rOPName = [];
+        var rOPGender = [];
+        var rOPAge = [];
+        var rOPAddress = [];
+        var rOPTypeID = [];
+        var rOPIDNumber = [];
+
+        $(".rOPName").each(function(typeIndex) {
+            rOPName.push($(this).val());
+        });
+        $(".rOPGender").each(function(typeIndex) {
+            rOPGender.push($(this).val());
+        });
+        $(".rOPAge").each(function(typeIndex) {
+            rOPAge.push($(this).val());
+        });
+        $(".rOPAddress").each(function(typeIndex) {
+            rOPAddress.push($(this).val());
+        });
+        $(".rOPTypeID").each(function(typeIndex) {
+            rOPTypeID.push($(this).val());
+        });
+        $(".rOPIDNumber").each(function(typeIndex) {
+            rOPIDNumber.push($(this).val());
+        });
+
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                rCheckIn: rCheckIn,
+                rCheckOut: rCheckOut,
+                rArivalFrom: rArivalFrom,
+                rBookingType: rBookingType,
+                rBookingReference: rBookingReference,
+                rBookingReferenceNumber: rBookingReferenceNumber,
+                rPurposeOfVisit: rPurposeOfVisit,
+                rRemarks: rRemarks,
+                
+                total: totalBillingAmount,
+                vat: totalBillingVat,
+                vat_amount: totalBillingVatAmount,
+                discount: totalBillingDiscount,
+                discount_type: totalBillingDiscountType,
+                discount_amount: totalBillingDiscountAmount,
+                subtotal: totalBillingSubtotal,
+                paid_amount: totalBillingPaidAmount,
+                due: totalBillingDue,
+
+                rRoomOrApartmentType: rRoomOrApartmentType,
+                rRoomOrApartmentNumber: rRoomOrApartmentNumber,
+                rAdult: rAdult,
+                rChild: rChild,
+                rPrice: rPrice,
+
+                rcName: rcName,
+                rcEmail: rcEmail,
+                rcPhone: rcPhone,
+                rcCountry: rcCountry,
+                rcState: rcState,
+                rcCity: rcCity,
+                rcGender: rcGender,
+                rcAge: rcAge,
+                rcAddress: rcAddress,
+                rcTypeID: rcTypeID,
+                rcIDNumber: rcIDNumber,
+
+                rOPName: rOPName,
+                rOPGender: rOPGender,
+                rOPAge: rOPAge,
+                rOPAddress: rOPAddress,
+                rOPTypeID: rOPTypeID,
+                rOPIDNumber: rOPIDNumber,
+            },
+            dataType: "json",
+            success: function(data) {
+
             },
         });
     };

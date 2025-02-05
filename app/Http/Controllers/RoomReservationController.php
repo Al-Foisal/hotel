@@ -14,6 +14,10 @@ class RoomReservationController extends Controller
         $data['room_type'] = RoomType::get();
         return view('room-reservation.create', $data);
     }
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 
     public function getROAByType(Request $request)
     {
