@@ -50,12 +50,25 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
-                            <th>Room Type</th>
+                            <th>Supplier Name</th>
+                            <th>Supplier Phone</th>
+                            <th>Address</th>
+                            <th>Contact Person Name</th>
+                            <th>Contact Person Phone</th>
                             <th class="d-none">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($supplier as $suppliers)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$suppliers->name}}</td>
+                            <td>{{$suppliers->phone}}</td>
+                            <td>{{$suppliers->address}}</td>
+                            <td>{{$suppliers->contact_person_name}}</td>
+                            <td>{{$suppliers->contact_person_phone}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table><!--end /table-->
             </div><!--end /tableresponsive-->

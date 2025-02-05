@@ -50,12 +50,23 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
-                            <th>Room Type</th>
+                            <th>Payment Type</th>
+                            <th>Account Name</th>
+                            <th>Branch</th>
+                            <th>Account Number</th>
                             <th class="d-none">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($supplier_payment as $suppliers)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$suppliers->payment_type}}</td>
+                            <td>{{$suppliers->account_name}}</td>
+                            <td>{{$suppliers->branch}}</td>
+                            <td>{{$suppliers->account_number}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table><!--end /table-->
             </div><!--end /tableresponsive-->
