@@ -12,6 +12,40 @@
         font-weight: bolder;
         border-radius: 5px;
     }
+
+    /*preloader css */
+    .xloader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid blue;
+        border-right: 16px solid green;
+        border-bottom: 16px solid red;
+        border-left: 16px solid pink;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
 @endsection
 @section('content')
@@ -36,7 +70,9 @@
 </div><!--end row-->
 <!-- end page title end breadcrumb -->
 <div class="row">
-
+    <div class="alert alert-danger" id="em" style="display: none;">
+        <span id="displayErrorMessage"></span>
+    </div>
     <div class="card">
         <div class="card-header row">
             <div class="col-12">
@@ -541,13 +577,6 @@
         var rPurposeOfVisit = $("#rPurposeOfVisit").val();
         var rRemarks = $("#rRemarks").val();
 
-        var rRemarks = $("#rRemarks").val();
-        var rRemarks = $("#rRemarks").val();
-        var rRemarks = $("#rRemarks").val();
-        var rRemarks = $("#rRemarks").val();
-        var rRemarks = $("#rRemarks").val();
-        var rRemarks = $("#rRemarks").val();
-
         //room or apartment details
         var rRoomOrApartmentType = [];
         var rRoomOrApartmentNumber = [];
@@ -555,20 +584,30 @@
         var rChild = [];
         var rPrice = [];
 
-        $(".rRoomOrApartmentType").each(function(typeIndex) {
-            rRoomOrApartmentType.push($(this).val());
+        $(".rRoomOrApartmentType").each(function() {
+            if ($(this).val() !== null && $(this).val() !== '') {
+                rRoomOrApartmentType.push($(this).val());
+            }
         });
-        $(".rRoomOrApartmentNumber").each(function(typeIndex) {
-            rRoomOrApartmentNumber.push($(this).val());
+        $(".rRoomOrApartmentNumber").each(function() {
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rRoomOrApartmentNumber.push($(this).val());
+            }
         });
-        $(".rAdult").each(function(typeIndex) {
-            rAdult.push($(this).val());
+        $(".rAdult").each(function() {
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rAdult.push($(this).val());
+            }
         });
-        $(".rChild").each(function(typeIndex) {
-            rChild.push($(this).val());
+        $(".rChild").each(function() {
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rChild.push($(this).val());
+            }
         });
-        $(".rPrice").each(function(typeIndex) {
-            rPrice.push($(this).val());
+        $(".rPrice").each(function() {
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rPrice.push($(this).val());
+            }
         });
 
         //customer info
@@ -593,10 +632,14 @@
         var rOPIDNumber = [];
 
         $(".rOPName").each(function(typeIndex) {
-            rOPName.push($(this).val());
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rOPName.push($(this).val());
+            }
         });
         $(".rOPGender").each(function(typeIndex) {
-            rOPGender.push($(this).val());
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rOPGender.push($(this).val());
+            }
         });
         $(".rOPAge").each(function(typeIndex) {
             rOPAge.push($(this).val());
@@ -624,7 +667,7 @@
                 rBookingReferenceNumber: rBookingReferenceNumber,
                 rPurposeOfVisit: rPurposeOfVisit,
                 rRemarks: rRemarks,
-                
+
                 total: totalBillingAmount,
                 vat: totalBillingVat,
                 vat_amount: totalBillingVatAmount,
@@ -661,8 +704,20 @@
                 rOPIDNumber: rOPIDNumber,
             },
             dataType: "json",
+            beforeSend: function(xhr) {
+                $("#xbillingInvoice").html(`
+                <div style="position: relative;left: 43%;">
+                    <div class="xloader"></div>
+                </div>`);
+            },
             success: function(data) {
-
+                if (data.status == true) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    $("#em").show();
+                    $("#displayErrorMessage").text(data.message);
+                }
             },
         });
     };
