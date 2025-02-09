@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Session;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -12,7 +13,9 @@ class HrController extends Controller
 {
     public function index(Request $request){
       
-        $owner_id = Auth::user()->id;
+        // $owner_id = Auth::user()->id;
+        $owner_id = Session::get('owner_id');
+
 
         $query = DB::table('employees')
                     ->leftJoin('designations','employees.designation_id','designations.id')
@@ -41,7 +44,8 @@ class HrController extends Controller
     public function create()
     {
        
-        $owner_id = Auth::user()->id;
+        // $owner_id = Auth::user()->id;
+        $owner_id = Session::get('owner_id');
         $designations = DB::table('designations')->where('owner_id',$owner_id)->get();
 
         return view('employee.create', compact('designations'));
@@ -77,7 +81,8 @@ class HrController extends Controller
                 $image = uploadImage('emp', $file_name);
             }
 
-            $owner_id = Auth::user()->id;
+            // $owner_id = Auth::user()->id;
+            $owner_id = Session::get('owner_id');
             $employee = DB::table('employees')
                                 ->insertGetId([
                                 'owner_id'=>$owner_id,
@@ -120,7 +125,8 @@ class HrController extends Controller
     public function edit($id){
         $item = DB::table('employees')->where('id',$id)->first();
 
-        $owner_id = Auth::user()->id;
+        // $owner_id = Auth::user()->id;
+        $owner_id = Session::get('owner_id');
         $designations = DB::table('designations')->where('owner_id', $owner_id)->get();
         return view('employee.edit',compact('item','designations'));
     }

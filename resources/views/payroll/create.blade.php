@@ -35,12 +35,12 @@
             <!-- title row -->
             <div class="row">
                 <div class="col-12">
-                    <h5 class="d-flex align-items-center">
-                        <i class="fa-solid fa-receipt mr-2"></i> Pay Slip
-                        <small class="ml-auto"><b>Salary Date:</b> 
-                            <span style="color: green">{{ \Carbon\Carbon::now()->format('F j, Y') }}</span>
-                        </small>
-                    </h5>
+                    <h3 class="d-flex">
+                        <i class="fa-solid fas fa-receipt mr-2"></i>&nbsp;Pay Slip
+                    </h3>
+                    <h4 class="ml-auto"><b>Salary Date:</b> 
+                        <span style="color: green">{{ \Carbon\Carbon::now()->format('F j, Y') }}</span>
+                    </h4>
                 </div>
             </div>
             <hr>
@@ -67,7 +67,7 @@
                 <hr>
                 <!-- Payment Calculation -->
                 <div class="row">
-                  <div class="col-md-12 col-sm-12">
+                  <div class="col-md-10 col-sm-12">
                       <h4>Payment Calculation</h4>
                       <input type="hidden" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="salary_date">
                       <div class="table-responsive">
@@ -89,12 +89,9 @@
                                       <td>Total Number of Payable Days</td>
                                       <td><input type="number" readonly style="-webkit-appearance: none; -moz-appearance: textfield; background-color: #b7f3fd; pointer-events: none;" id="total_number_of_pay_day" name="total_number_of_pay_day" class="form-control"></td>
                                   </tr>
+                                 
                                   <tr>
-                                      <td>Per Day Salary</td>
-                                      <td><input type="number" step="0.01" id="per_day_salary" name="per_day_salary" class="form-control"></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Monthly Payable Salary</td>
+                                      <td>Monthly Salary</td>
                                       <td><input type="number" readonly style="-webkit-appearance: none; -moz-appearance: textfield; background-color: #b7f3fd; pointer-events: none;" step="0.01" id="monthly_salary" name="monthly_salary" class="form-control"></td>
                                   </tr>
                                   <tr>
@@ -117,14 +114,7 @@
                                       <td>Insurance Allowance</td>
                                       <td><input type="number" step="0.01" id="insurance_allowance" name="insurance_allowance" class="form-control"></td>
                                   </tr>
-                                  <tr>
-                                      <td>Sales Commission</td>
-                                      <td><input type="number" step="0.01" id="sales_commission" name="sales_commission" class="form-control"></td>
-                                  </tr>
-                                  <tr>
-                                      <td>Retail Commission</td>
-                                      <td><input type="number" step="0.01" id="retail_commission" name="retail_commission" class="form-control"></td>
-                                  </tr>
+                                 
                                   <tr>
                                       <td><span style="color: blue;">Total Others</span></td>
                                       <td><input type="number" readonly style="-webkit-appearance: none; -moz-appearance: textfield; background-color: #b7f3fd; pointer-events: none;" id="total_others" name="total_others" class="form-control"></td>
@@ -141,10 +131,7 @@
                                       <td>Total Payable Salary</td>
                                       <td><input type="number" readonly style="-webkit-appearance: none; -moz-appearance: textfield; background-color: #b7f3fd; pointer-events: none;" id="total_payable_salary" name="total_payable_salary" class="form-control"></td>
                                   </tr>
-                                  {{-- <tr>
-                                      <td>Advance Less</td>
-                                      <td><input type="number" step="0.01" id="advance_less" name="advance_less" class="form-control"></td>
-                                  </tr> --}}
+                                
                                   <tr>
                                       <td>Any Deduction</td>
                                       <td><input type="number" step="0.01" id="any_deduction" name="any_deduction" class="form-control"></td>
@@ -161,12 +148,11 @@
               <br>
                 <!-- /.row -->
                 <!-- this row will not appear when printing -->
-                <div class="row no-print">
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-success float-right">
+
+                <div class="col-md-10 no-print d-flex justify-content-end">                 
+                       <button type="submit" class="btn btn-success">
                             <i class="far fa-credit-card"></i> Submit Payment
-                        </button>
-                    </div>
+                    </button>                 
                 </div>
             </form>
         </div>
