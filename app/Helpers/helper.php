@@ -106,6 +106,35 @@ function menuList()
             ],
 
         ],
+        [
+            'sideIcon'   => 'user',
+            'title'      => 'Human Resource',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Human_Resource',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Designation',
+                    'link'       => route('rrs.desg.index'),
+                    'permission' => 'Designation',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Employee',
+                    'link'       => route('rrs.emp.index'),
+                    'permission' => 'Employee',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Payroll',
+                    'link'       => route('rrs.payroll.index'),
+                    'permission' => 'Payroll',
+                ],
+        
+            ],
+
+        ],
     ];
 }
 
