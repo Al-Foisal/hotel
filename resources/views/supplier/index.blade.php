@@ -55,7 +55,7 @@
                             <th>Address</th>
                             <th>Contact Person Name</th>
                             <th>Contact Person Phone</th>
-                            <th class="d-none">Action</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,6 +67,16 @@
                             <td>{{$suppliers->address}}</td>
                             <td>{{$suppliers->contact_person_name}}</td>
                             <td>{{$suppliers->contact_person_phone}}</td>
+                            <td>
+                                <div class="d-flex justify-content-start">
+                                    <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal{{$suppliers->id}}">Edit</button>
+                                    <form action="{{route('rrs.supplier.delete',$suppliers->id)}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want delete this item?')">Delete</button>
+                                    </form>
+                                </div>
+
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

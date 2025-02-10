@@ -50,12 +50,17 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
-                            <th>Room Type</th>
+                            <th>Category Name</th>
                             <th class="d-none">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($product_category as $suppliers)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$suppliers->name}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table><!--end /table-->
             </div><!--end /tableresponsive-->

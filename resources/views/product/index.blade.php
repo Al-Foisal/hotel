@@ -50,12 +50,25 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
-                            <th>Room Type</th>
+                            <th>Product Name</th>
+                            <th>Expiry Date Alert</th>
+                            <th>Low Stock Alert</th>
+                            <th>Shelf Position</th>
+                            <th>Product Category</th>
                             <th class="d-none">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($product as $suppliers)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$suppliers->name}}</td>
+                            <td>{{$suppliers->expiry_date_alert}}</td>
+                            <td>{{$suppliers->low_stock_alert}}</td>
+                            <td>{{$suppliers->shelf_position}}</td>
+                            <td>{{$suppliers->product_category_id}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table><!--end /table-->
             </div><!--end /tableresponsive-->

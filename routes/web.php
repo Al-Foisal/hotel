@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(SupplierController::class)->prefix('/rrs/supplier')->name('rrs.supplier.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
 
     Route::controller(SupplierPaymentController::class)->prefix('/rrs/supplier-payment')->name('rrs.supplier-payment.')->group(function () {

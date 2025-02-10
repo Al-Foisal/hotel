@@ -50,12 +50,29 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
-                            <th>Room Type</th>
+                            <th>Supplier Name</th>
+                            <th>Total</th>
+                            <th>Discount</th>
+                            <th>Vat</th>
+                            <th>Sub Total</th>
+                            <th>Paid Amount</th>
+                            <th>Due</th>
                             <th class="d-none">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($purchase as $suppliers)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$suppliers->supplier_id}}</td>
+                            <td>{{$suppliers->total}}</td>
+                            <td>{{$suppliers->discount}}</td>
+                            <td>{{$suppliers->vat}}</td>
+                            <td>{{$suppliers->sub_total}}</td>
+                            <td>{{$suppliers->paid_amount}}</td>
+                            <td>{{$suppliers->due}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table><!--end /table-->
             </div><!--end /tableresponsive-->

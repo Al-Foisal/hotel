@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 05, 2025 at 10:56 AM
+-- Generation Time: Feb 10, 2025 at 07:30 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.4
 
@@ -215,10 +215,10 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Table structure for table `products`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `products` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiry_date_alert` date DEFAULT NULL,
@@ -229,6 +229,13 @@ CREATE TABLE `product` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `expiry_date_alert`, `low_stock_alert`, `shelf_position`, `product_category_id`, `owner_id`, `created_at`, `updated_at`) VALUES
+(1, 'Coca Cola', '2025-02-06', 1, '12', 1, 1, '2025-02-06 07:56:42', '2025-02-06 07:56:50');
 
 -- --------------------------------------------------------
 
@@ -243,6 +250,13 @@ CREATE TABLE `product_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `product_categories`
+--
+
+INSERT INTO `product_categories` (`id`, `name`, `owner_id`, `created_at`, `updated_at`) VALUES
+(1, 'Drinks', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -263,6 +277,13 @@ CREATE TABLE `purchases` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `supplier_id`, `total`, `discount`, `vat`, `sub_total`, `paid_amount`, `due`, `owner_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 100.00, 10.00, 20.00, 5765.00, 567.00, 0.00, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -398,6 +419,13 @@ CREATE TABLE `stocks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `stocks`
+--
+
+INSERT INTO `stocks` (`id`, `product_category_id`, `product_id`, `supplier_id`, `expiry_date`, `quantity`, `unit_price`, `average_price`, `last_purchase_price`, `status`, `owner_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, '2025-02-06', 5, 34.00, 234.00, 12.00, 1, 1, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -416,6 +444,14 @@ CREATE TABLE `suppliers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `suppliers`
+--
+
+INSERT INTO `suppliers` (`id`, `name`, `phone`, `address`, `contact_person_name`, `contact_person_phone`, `owner_id`, `created_at`, `updated_at`) VALUES
+(1, 'Fahad', '01790004664', 'Dhanmondi', 'Sam', '01790004664', 1, NULL, NULL),
+(2, 'sam', '01790004664', 'dhanmondi', 'sam', '01790004664', 1, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -431,6 +467,13 @@ CREATE TABLE `supplier_payments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `supplier_payments`
+--
+
+INSERT INTO `supplier_payments` (`id`, `payment_type`, `account_name`, `branch`, `account_number`, `created_at`, `updated_at`) VALUES
+(1, 'Mobile Banking', 'bkash', 'Dhanmondi', '01790004664', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -556,9 +599,9 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `product`
+-- Indexes for table `products`
 --
-ALTER TABLE `product`
+ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -677,22 +720,22 @@ ALTER TABLE `migrations`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE `product`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `products`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `purchase_details`
@@ -722,19 +765,19 @@ ALTER TABLE `room_types`
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `supplier_payments`
 --
 ALTER TABLE `supplier_payments`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`

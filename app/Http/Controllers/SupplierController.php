@@ -18,4 +18,15 @@ class SupplierController extends Controller
             ->get();
         return view('supplier.index', compact('supplier'));
     }
+
+    public function delete(Request $request, $id)
+    {
+        $item = Floor::where('id', $id)->first();
+        if (!$item || $item->owner_id == $item->id) {
+            return back()->withToastError('No data found');
+        }
+
+        $item->delete();
+        return back()->withToastSuccess('Data deleted successfully');
+    }
 }
