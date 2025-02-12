@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\DB;
 
 class RoomReservationController extends Controller
 {
+    public function index(Request $request)
+    {
+        $data = [];
+        $data['rr'] = RoomReservation::orderBy('check_in', 'desc')->paginate();
+        return view('room-reservation.index', $data);
+    }
     public function create()
     {
         $data = [];

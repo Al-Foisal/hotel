@@ -24,6 +24,18 @@ class RoomReservation extends Model
         });
     }
 
+    protected $casts = [
+        'check_in' => 'date',
+        'check_out' => 'date',
+    ];
+
+    public function rooms(){
+        return $this->hasMany(RoomReservationDetails::class);
+    }
+
+    public function roomPersonDetails(){
+        return $this->hasMany(RoomReservationOtherPersonDetails::class);
+    }
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');

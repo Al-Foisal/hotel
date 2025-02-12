@@ -113,6 +113,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
 
         Route::get('/room-reservation-status', 'roomReservationStatus')->name('roomReservationStatus');
         Route::post('/get-roa-by-type', 'getROAByType')->name('getROAByType');
@@ -150,10 +151,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
 
-    Route::get('/fdg',[PayrollController::class,'test'])->name('payroll_show_data');
+    Route::get('/fdg', [PayrollController::class, 'test'])->name('payroll_show_data');
     //----------- HR (end)-------------------
 
-    
+
 
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;

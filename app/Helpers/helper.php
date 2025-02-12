@@ -59,6 +59,12 @@ function menuList()
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
+                    'title'      => 'Reservation List',
+                    'link'       => route('roomReservation.index'),
+                    'permission' => 'Reservation_List',
+                ],
+                [
+                    'sideIcon'   => '',
                     'title'      => 'Check In',
                     'link'       => route('roomReservation.create'),
                     'permission' => 'Check_In',
