@@ -19,6 +19,7 @@ use App\Http\Controllers\SystemUserController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\HrController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\WebsiteManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -155,7 +156,26 @@ Route::middleware('auth')->group(function () {
     //----------- HR (end)-------------------
 
 
-
+    Route::controller(WebsiteManagementController::class)->prefix('/ws')->name('ws.')->group(function () {
+        Route::prefix('/about')->name('about.')->group(function () {
+            Route::get('/index', 'indexAbout')->name('index');
+            Route::post('/store-or-update/{id?}', 'storeOrUpdateAbout')->name('storeOrUpdate');
+            Route::post('/status/{id}', 'statusAbout')->name('status');
+        });
+        Route::prefix('/testimonial')->name('testimonial.')->group(function () {
+            Route::get('/index', 'indexTestimonial')->name('index');
+            Route::post('/store-or-update/{id?}', 'storeOrUpdateTestimonial')->name('storeOrUpdate');
+            Route::post('/status/{id}', 'statusTestimonial')->name('status');
+        });
+        Route::prefix('/contact')->name('contact.')->group(function () {
+            Route::get('/index', 'indexContact')->name('index');
+            Route::post('/responsce/{id}', 'responsceContact')->name('responsce');
+        });
+        Route::prefix('/setup')->name('setup.')->group(function () {
+            Route::get('/index', 'indexSetup')->name('index');
+            Route::post('/store-or-update/{id?}', 'storeOrUpdateSetup')->name('storeOrUpdate');
+        });
+    });
     Route::get('/goto-dashboard', function () {
         $branch_id = request()->branch_id;
         $branch    = Branch::where('owner_id', session('owner_id'))

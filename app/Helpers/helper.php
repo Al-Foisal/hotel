@@ -199,6 +199,40 @@ function menuList()
             ],
 
         ],
+        [
+            'sideIcon'   => 'thermometer',
+            'title'      => 'Website Management',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Website_Management',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Website About',
+                    'link'       => route('ws.about.index'),
+                    'permission' => 'Website_About',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Website Testimonial',
+                    'link'       => route('ws.testimonial.index'),
+                    'permission' => 'Website_Testimonial',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Website Contact',
+                    'link'       => route('ws.contact.index'),
+                    'permission' => 'Website_Contact',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Website Setup',
+                    'link'       => route('ws.setup.index'),
+                    'permission' => 'Website_Setup',
+                ],
+            ],
+
+        ],
 
     ];
 }
@@ -240,6 +274,6 @@ function isOperator()
     if (auth()->user()->responsibility === 'Operator') {
         return true;
     } else {
-        return false;
+        return false;   
     }
 }
