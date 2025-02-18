@@ -64,11 +64,17 @@
                             <td>
                                 <img src="{{asset($item->image)}}" style="height: 100px;">
                             </td>
-                            <td>{{$item->name}}</td>
+                            <td><b>Name: </b>{{$item->name}}, <br>
+                                <h6 class="fw-semibold m-0">Status: <span class="text-{{$item->status==1?'success':'danger'}} fw-normal"> {{$item->status==1?'Active':'Inactive'}}</span></h6>
+                            </td>
                             <td>{{$item->details}}</td>
                             <td>
                                 <div class="d-flex justify-content-start">
                                     <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal{{$item->id}}">Edit</button>
+                                    <form action="{{route('ws.about.status',$item->id)}}" method="post">
+                                        @csrf
+                                        <button type="submit" class="btn btn-{{$item->status==1?'danger':'success'}} btn-sm me-1" onclick="return confirm('Are you sure want {{$item->status==1?'Inactive':'Active'}} this item?')">{{$item->status==1?'Inactive':'Active'}}</button>
+                                    </form>
                                     <form action="{{route('ws.about.delete',$item->id)}}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want delete this item?')">Delete</button>
@@ -82,7 +88,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div><!--end modal-header-->
                                             <div class="modal-body">
-                                                <form action="{{route('ws.about.update',$item->id)}}" method="post" enctype="multipart/form-data">
+                                                <form action="{{route('ws.about.storeOrUpdate',$item->id)}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-md-12 mb-3">
@@ -90,12 +96,15 @@
                                                             <input type="text" class="form-control" placeholder="Enter about name" name="name" required value="{{$item->name??''}}">
                                                         </div>
                                                         <div class="col-md-12 mb-3">
-                                                            <label class="form-label" for="exampleInputEmail1">Name <small style="color: red">*</small></label>
-                                                            <input type="text" class="form-control" placeholder="Enter about name" name="name" required value="{{$item->name??''}}">
+                                                            <label class="form-label" for="exampleInputEmail1">Details <small style="color: red">*</small></label>
+                                                            <textarea name="details" class="form-control">{{$item->details??''}}</textarea>
                                                         </div>
                                                         <div class="col-md-12 mb-3">
-                                                            <label class="form-label" for="exampleInputEmail1">Image <small style="color: red">*</small></label>
-                                                            <input type="text" class="form-control" placeholder="Enter about name" name="name" required value="{{$item->name??''}}">
+                                                            <label class="form-label" for="exampleInputEmail1">Image (676x676)px<small style="color: red">*</small></label>
+                                                            <input type="file" class="form-control" placeholder="Enter about name" name="image">
+                                                            @if($item->image)
+                                                            <img src="{{asset($item->image)}}" style="height: 100px;">
+                                                            @endif
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div><!--end row-->
@@ -124,14 +133,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div><!--end modal-header-->
             <div class="modal-body">
-                <form action="{{route('ws.about.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('ws.about.storeOrUpdate')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label" for="">Designation Name <small style="color: red">*</small></label>
-                            <input type="text" class="form-control" placeholder="Enter Designation" name="name" required>
+                            <label class="form-label" for="exampleInputEmail1">Name <small style="color: red">*</small></label>
+                            <input type="text" class="form-control" placeholder="Enter about name" name="name" required>
                         </div>
-                        
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="exampleInputEmail1">Details <small style="color: red">*</small></label>
+                            <textarea name="details" class="form-control"></textarea>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="exampleInputEmail1">Image  (676x676)px<small style="color: red">*</small></label>
+                            <input type="file" class="form-control" placeholder="Enter about name" name="image" required>
+
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div><!--end row-->
                 </form>

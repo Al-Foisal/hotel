@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('ws_setups', function (Blueprint $table) {
             $table->id();
             $table->string('home_theme');
+            $table->text('contact_breadcrumb')->nullable();
+            $table->text('contact_body')->nullable();
             $table->string('hotel_name');
             $table->string('slogan')->nullable();
             $table->string('logo');
@@ -25,8 +27,6 @@ return new class extends Migration
             $table->string('facebook')->nullable();
             $table->string('youtube')->nullable();
             $table->string('instagram')->nullable();
-            $table->text('contact_breadcrumb')->nullable();
-            $table->text('contact_body')->nullable();
             $table->timestamps();
         });
     }

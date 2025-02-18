@@ -161,6 +161,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/index', 'indexAbout')->name('index');
             Route::post('/store-or-update/{id?}', 'storeOrUpdateAbout')->name('storeOrUpdate');
             Route::post('/status/{id}', 'statusAbout')->name('status');
+            Route::post('/delete/{id}', 'deleteAbout')->name('delete');
         });
         Route::prefix('/testimonial')->name('testimonial.')->group(function () {
             Route::get('/index', 'indexTestimonial')->name('index');
