@@ -167,6 +167,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/index', 'indexTestimonial')->name('index');
             Route::post('/store-or-update/{id?}', 'storeOrUpdateTestimonial')->name('storeOrUpdate');
             Route::post('/status/{id}', 'statusTestimonial')->name('status');
+            Route::post('/delete/{id}', 'deleteTestimonial')->name('delete');
         });
         Route::prefix('/contact')->name('contact.')->group(function () {
             Route::get('/index', 'indexContact')->name('index');
@@ -174,7 +175,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::prefix('/setup')->name('setup.')->group(function () {
             Route::get('/index', 'indexSetup')->name('index');
-            Route::post('/store-or-update/{id?}', 'storeOrUpdateSetup')->name('storeOrUpdate');
+            Route::post('/store-or-update', 'storeOrUpdateSetup')->name('storeOrUpdate');
         });
     });
     Route::get('/goto-dashboard', function () {

@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('ws_setups', function (Blueprint $table) {
             $table->id();
             $table->string('home_theme');
-            $table->text('contact_breadcrumb')->nullable();
-            $table->text('contact_body')->nullable();
-            $table->string('hotel_name');
-            $table->string('slogan')->nullable();
+            $table->text('contact_breadcrumb')->nullable();//
+            $table->text('contact_body')->nullable();//
+            $table->string('hotel_name');//
+            $table->string('slogan')->nullable();//
             $table->string('logo');
             $table->string('favicon')->nullable();
-            $table->string('address')->nullable();
-            $table->string('email')->nullable();
-            $table->string('forwarding_email')->nullable();
-            $table->string('about_hotel')->nullable();
+            $table->string('address')->nullable();//
+            $table->string('phone')->nullable();//
+            $table->string('email')->nullable();//
+            $table->string('forwarding_email')->nullable();//
+            $table->string('about_hotel')->nullable();//
             $table->string('facebook')->nullable();
             $table->string('youtube')->nullable();
             $table->string('instagram')->nullable();
