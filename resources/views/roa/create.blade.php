@@ -81,7 +81,7 @@
                         <input type="text" class="form-control" placeholder="Enter wifi password" name="wifi_password">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Room Image</label>
+                        <label class="form-label" for="exampleInputEmail1">Room Image (437x417) px</label>
                         <input type="file" class="form-control" placeholder="Enter room image" name="image">
                     </div>
                     <div class="col-md-12 mb-3">

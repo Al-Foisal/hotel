@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomOrApartmet extends Model
 {
-    use GlobalOwnerIdentityScopeTrait;
+    //use GlobalOwnerIdentityScopeTrait;
     protected $guarded = [];
 
     public static function boot()
