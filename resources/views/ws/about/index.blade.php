@@ -100,7 +100,7 @@
                                                             <textarea name="details" class="form-control">{{$item->details??''}}</textarea>
                                                         </div>
                                                         <div class="col-md-12 mb-3">
-                                                            <label class="form-label" for="exampleInputEmail1">Image (676x676)px<small style="color: red">*</small></label>
+                                                            <label class="form-label" for="exampleInputEmail1">Image (576x676)px<small style="color: red">*</small></label>
                                                             <input type="file" class="form-control" placeholder="Enter about name" name="image">
                                                             @if($item->image)
                                                             <img src="{{asset($item->image)}}" style="height: 100px;">
@@ -145,7 +145,7 @@
                             <textarea name="details" class="form-control"></textarea>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label class="form-label" for="exampleInputEmail1">Image  (676x676)px<small style="color: red">*</small></label>
+                            <label class="form-label" for="exampleInputEmail1">Image  (576x676)px<small style="color: red">*</small></label>
                             <input type="file" class="form-control" placeholder="Enter about name" name="image" required>
 
                         </div>
