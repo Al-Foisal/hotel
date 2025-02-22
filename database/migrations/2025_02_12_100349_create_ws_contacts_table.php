@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->string('message')->nullable();
-            $table->tinyInteger('is_responce')->default(0);
+            $table->tinyInteger('is_response')->default(0);
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\WsAbout;
+use App\Models\WsContact;
 use App\Models\WsSetup;
 use App\Models\WsTestimonial;
 use Illuminate\Http\Request;
@@ -149,8 +150,28 @@ class WebsiteManagementController extends Controller
         return back()->withToastSuccess('Data deleted successfully');
     }
 
-    public function indexContact(Request $request) {}
-    public function responsceContact(Request $request, $id) {}
+    public function indexContact(Request $request)
+    {
+        $data = [];
+        $data['items'] = WsContact::orWhereAny([
+            'name',
+            'phone',
+            'email',
+            'message'
+        ], 'like', '%' . $request->q . '%')->orderBy('is_response')->get();
+        return view('ws.contact.index', $data);
+    }
+    public function responsceContact(Request $request, $id)
+    {
+        $item = WsContact::where('id', $id)->where('is_response', 0)->first();
+        if (!$item) {
+            return back()->withToastError('No data found');
+        }
+
+        $item->is_response = 1;
+        $item->save();
+        return back()->withToastSuccess('Query responsed successfully');
+    }
 
     public function indexSetup(Request $request)
     {
