@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="exampleInputEmail1">Hotel slogan</label>
-                        <input type="text" class="form-control" placeholder="Enter hotel slogan" name="hotel_slogan" value="{{$item->hotel_slogan??''}}">
+                        <input type="text" class="form-control" placeholder="Enter hotel slogan" name="slogan" value="{{$item->slogan??''}}">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label class="form-label" for="exampleInputEmail1">Hotel phone <small style="color: red">*</small></label>

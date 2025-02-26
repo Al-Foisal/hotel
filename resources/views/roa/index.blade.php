@@ -77,6 +77,10 @@
                                 <b>Room Type: </b>{{$detail->roomType->name??'-'}}, <br>
                                 <b>Room Number: </b>{{$detail->room_number}}, <br>
                                 <b>Price Per Day: </b> {{$detail->price}}, <br>
+                                <b>Adult: </b> {{$detail->adult}}, <br>
+                                <b>Child: </b> {{$detail->child}}, <br>
+                                <b>Bed: </b> {{$detail->bed}}, <br>
+                                <b>Bath: </b> {{$detail->bath}}, <br>
                                 <b>Capacity: </b> {{$detail->capacity}} Persons, <br>
                                 <b>Diameter: </b> {{$detail->diameter}} m<sup>2</sup>, <br>
                                 <b>Wifi-Password: </b>{{$detail->wifi_password}}, <br>

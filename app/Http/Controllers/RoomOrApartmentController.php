@@ -9,6 +9,7 @@ use App\Models\RoomOrApartmet;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class RoomOrApartmentController extends Controller
@@ -119,6 +120,11 @@ class RoomOrApartmentController extends Controller
                 'room_number' => $request->room_number,
                 'price' => $request->price,
                 'capacity' => $request->capacity,
+                'adult' => $request->adult,
+                'child' => $request->child,
+                'bed' => $request->bed,
+                'bath' => $request->bath,
+                'capacity' => $request->capacity,
                 'diameter' => $request->diameter,
                 'wifi_password' => $request->wifi_password,
                 'image' => $image,
@@ -185,9 +191,12 @@ class RoomOrApartmentController extends Controller
             if ($request->hasFile('image')) {
                 $file_name = $request->file('image');
                 $image = uploadImage('roa', $file_name);
-            }
 
-            if ($request->hasFile('image')) {
+                $image_path = public_path($data->image);
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+
                 $data->update(['image' => $image]);
             }
 
@@ -197,6 +206,10 @@ class RoomOrApartmentController extends Controller
                 'floor_id' => $request->floor_id,
                 'room_number' => $request->room_number,
                 'price' => $request->price,
+                'adult' => $request->adult,
+                'child' => $request->child,
+                'bed' => $request->bed,
+                'bath' => $request->bath,
                 'capacity' => $request->capacity,
                 'diameter' => $request->diameter,
                 'wifi_password' => $request->wifi_password,
@@ -223,12 +236,31 @@ class RoomOrApartmentController extends Controller
         }
     }
 
+    public function status(Request $request, $id)
+    {
+        $item = RoomOrApartmet::where('id', $id)->first();
+        if (!$item) {
+            return back()->withToastError('No data found');
+        }
+
+        $item->status = $item->status == 1 ? 0 : 1;
+        $item->save();
+        return back()->withToastSuccess('Status updated successfully');
+    }
+
     public function delete(Request $request, $id)
     {
         $data = RoomOrApartmet::where('id', $id)->first();
         if (!$data) {
             return back()->withToastError('No data found');
         }
+
+        $image_path = public_path($data->image);
+        if (File::exists($image_path)) {
+            File::delete($image_path);
+        }
+
+
         $data->facilities()->delete();
         $data->delete();
         return back()->withToastSuccess('Data deleted successfully');

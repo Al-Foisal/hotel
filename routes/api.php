@@ -6,6 +6,8 @@ use App\Models\WsTestimonial;
 use App\Models\Facility;
 use App\Models\WsContact;
 use App\Models\RoomOrApartmet;
+use App\Models\RoomReservation;
+use App\Models\RoomReservationDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +27,24 @@ Route::get('/ws-setup', function () {
 Route::get('/hotel-facilities', function () {
     return Facility::get();
 });
-Route::get('/room-or-apartments', function () {
-    return RoomOrApartmet::where('status', 1)->with('roomType')->get();
+Route::get('/room-or-apartments', function (Request $request) {
+        return RoomOrApartmet::where('status', 1)->with('roomType')->get();
+    
+    $from_date=json_encode($request->from_date);
+    $to_date=json_encode($request->to_date);
+    // return $from_date;
+    if(!$from_date && !$to_date){
+        return RoomOrApartmet::where('status', 1)->with('roomType')->get();
+    } else {
+        $booked_room=RoomReservation::whereDate('check_in','>=',$from_date)->whereDate('check_out','<=',$form_date)->pluck('id')->toArray();
+
+        $room_id=RoomReservationDetails::whereIn('room_reservation_id',$booked_room)->pluck('room_or_apartment_id')->toArray();
+        $rooms=RoomOrApartmet::whereIn('id',$room_id)->get();
+        return $rooms;
+    }
+});
+Route::get('/room-or-apartment-details/{id}', function ($id) {
+    return RoomOrApartmet::where('status', 1)->where('id',$id)->with('roomType','facilities')->first();
 });
 Route::post('/save-message', function (Request $request) {
     // return $request['name'];

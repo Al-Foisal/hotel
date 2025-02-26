@@ -64,17 +64,33 @@
                         <label class="form-label" for="exampleInputEmail1">Room Number*</label>
                         <input type="text" class="form-control" placeholder="Enter room number" name="room_number" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Room Capacity</label>
-                        <input type="text" class="form-control" placeholder="Enter room capacity" name="capacity">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Adult*</label>
+                        <input type="text" class="form-control" placeholder="Enter adult" name="adult" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Room Diameter(m<sup>2</sup>)</label>
-                        <input type="number" step="0.01" class="form-control" placeholder="Enter room diameter" name="diameter">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Child*</label>
+                        <input type="text" class="form-control" placeholder="Enter child" name="child" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Price per day</label>
-                        <input type="number" step="0.01" class="form-control" placeholder="Enter room price" name="price">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Room Capacity*</label>
+                        <input type="text" class="form-control" placeholder="Enter room capacity" name="capacity" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Bed*</label>
+                        <input type="text" class="form-control" placeholder="Enter bed" name="bed" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Bath*</label>
+                        <input type="text" class="form-control" placeholder="Enter bath" name="bath" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Room Diameter(m<sup>2</sup>)*</label>
+                        <input type="number" step="0.01" class="form-control" placeholder="Enter room diameter" name="diameter" required>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Price per day*</label>
+                        <input type="number" step="0.01" class="form-control" placeholder="Enter room price" name="price" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="exampleInputEmail1">Wifi Password</label>

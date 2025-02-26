@@ -65,17 +65,33 @@
                         <label class="form-label" for="exampleInputEmail1">Room Number*</label>
                         <input type="text" class="form-control" placeholder="Enter room number" name="room_number" value="{{$item->room_number}}" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Room Capacity</label>
-                        <input type="text" class="form-control" placeholder="Enter room capacity" name="capacity" value="{{$item->capacity}}">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Adult*</label>
+                        <input type="text" class="form-control" placeholder="Enter adult" name="adult" required value="{{$item->adult}}">
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Room Diameter(m<sup>2</sup>)</label>
-                        <input type="number" step="0.01" class="form-control" placeholder="Enter room diameter" name="diameter" value="{{$item->diameter}}">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Child*</label>
+                        <input type="text" class="form-control" placeholder="Enter child" name="child" required value="{{$item->child}}">
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Price per day</label>
-                        <input type="number" step="0.01" class="form-control" placeholder="Enter room price" name="price" value="{{$item->price}}">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Room Capacity*</label>
+                        <input type="text" class="form-control" placeholder="Enter room capacity" name="capacity" required value="{{$item->capacity}}">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Bed*</label>
+                        <input type="text" class="form-control" placeholder="Enter bed" name="bed" required value="{{$item->bed}}">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Bath*</label>
+                        <input type="text" class="form-control" placeholder="Enter bath" name="bath" required value="{{$item->bath}}">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Room Diameter(m<sup>2</sup>)*</label>
+                        <input type="number" step="0.01" class="form-control" placeholder="Enter room diameter" name="diameter" required value="{{$item->diameter}}">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="exampleInputEmail1">Price per day*</label>
+                        <input type="number" step="0.01" class="form-control" placeholder="Enter room price" name="price" required value="{{$item->price}}">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label" for="exampleInputEmail1">Wifi Password</label>
