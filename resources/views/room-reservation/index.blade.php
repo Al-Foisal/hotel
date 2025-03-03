@@ -109,7 +109,7 @@
                     </tbody>
                 </table>
                 <div class="mt-2">
-                    {{$item->links()}}
+                    {{$rr->links()}}
                 </div>
             </div>
         </div><!--end card-body-->

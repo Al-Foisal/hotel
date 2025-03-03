@@ -42,6 +42,16 @@ class RoomReservationController extends Controller
         }
         DB::beginTransaction();
         try {
+            $latest_bill = DB::table('room_reservations')->orderBy('id', 'desc')->first();
+
+            if (isset($latest_bill)) {
+                $invoice_number = date("y") . str_pad((int) $latest_bill->invoice + 1, 5, "0", STR_PAD_LEFT);
+                $invoice        = 1 + $latest_bill->invoice;
+            } else {
+                $invoice_number = date("y") . str_pad((int) 1, 5, "0", STR_PAD_LEFT);
+                $invoice        = 1;
+            }
+
             $customer = Customer::create([
                 'name' => $request->rcName,
                 'email' => $request->rcEmail,
@@ -57,6 +67,8 @@ class RoomReservationController extends Controller
             ]);
 
             $reservation = RoomReservation::create([
+                'invoice_number' => $invoice_number,
+                'invoice' => $invoice,
                 'check_in' => $request->rCheckIn,
                 'check_out' => $request->rCheckOut,
                 'arival_from' => $request->rArivalFrom,
@@ -120,6 +132,17 @@ class RoomReservationController extends Controller
                 'message' => $th->getMessage()
             ]);
         }
+    }
+  
+    public function edit($id)
+    {
+        $data = [];
+        $data['room_type'] = RoomType::get();
+        $data['rr'] = RoomReservation::where('id', $id)->first();
+        if (!$data['rr']) {
+            return redirect()->back()->withToastError('No data found!');
+        }
+        return view('room-reservation.edit', $data);
     }
 
     public function getROAByType(Request $request)

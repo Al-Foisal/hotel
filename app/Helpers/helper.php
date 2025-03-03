@@ -105,6 +105,12 @@ function menuList()
                 ],
                 [
                     'sideIcon'   => '',
+                    'title'      => 'Promo Code',
+                    'link'       => route('promoCode.index'),
+                    'permission' => 'Promo Code',
+                ],
+                [
+                    'sideIcon'   => '',
                     'title'      => 'Room or Apartment',
                     'link'       => route('rrs.roa.index'),
                     'permission' => 'Room_or_Apartment',

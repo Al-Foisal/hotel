@@ -19,6 +19,7 @@ use App\Http\Controllers\SystemUserController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\HrController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\PromoCodeController;
 use App\Http\Controllers\WebsiteManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +107,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(PromoCodeController::class)->prefix('/promo-code')->name('promoCode.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/status/{id}', 'status')->name('status');
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
     Route::controller(RoomReservationController::class)->prefix('/room-reservation')->name('roomReservation.')->group(function () {
