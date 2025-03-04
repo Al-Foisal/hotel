@@ -6,7 +6,7 @@ use App\Models\Facility;
 use App\Models\Floor;
 use App\Models\RoomOrApartmentFacility;
 use App\Models\RoomOrApartmet;
-use App\Models\RoomType;
+use App\Models\RoomCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -83,7 +83,7 @@ class RoomOrApartmentController extends Controller
     {
         $data = [];
         $data['facility'] = Facility::orderBy('name', 'asc')->get();
-        $data['room_type'] = RoomType::orderBy('name', 'asc')->get();
+        $data['room_category'] = RoomCategory::orderBy('name', 'asc')->get();
         $data['floor'] = Floor::orderBy('name', 'asc')->get();
 
         return view('roa.create', $data);
@@ -93,7 +93,7 @@ class RoomOrApartmentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'type' => 'required',
-            'room_type_id' => 'required',
+            'room_category_id' => 'required',
             'floor_id' => 'required',
             'room_number' => 'required',
             'price' => 'required',
@@ -115,7 +115,7 @@ class RoomOrApartmentController extends Controller
 
             $data = RoomOrApartmet::create([
                 'type' => $request->type,
-                'room_type_id' => $request->room_type_id,
+                'room_category_id' => $request->room_category_id,
                 'floor_id' => $request->floor_id,
                 'room_number' => $request->room_number,
                 'price' => $request->price,
@@ -157,7 +157,7 @@ class RoomOrApartmentController extends Controller
         }
         $data['item'] = $item;
         $data['facility'] = Facility::orderBy('name', 'asc')->get();
-        $data['room_type'] = RoomType::orderBy('name', 'asc')->get();
+        $data['room_category'] = RoomCategory::orderBy('name', 'asc')->get();
         $data['floor'] = Floor::orderBy('name', 'asc')->get();
 
 
@@ -169,7 +169,7 @@ class RoomOrApartmentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'type' => 'required',
-            'room_type_id' => 'required',
+            'room_category_id' => 'required',
             'floor_id' => 'required',
             'room_number' => 'required',
             'price' => 'required',
@@ -202,7 +202,7 @@ class RoomOrApartmentController extends Controller
 
             $data->update([
                 'type' => $request->type,
-                'room_type_id' => $request->room_type_id,
+                'room_category_id' => $request->room_category_id,
                 'floor_id' => $request->floor_id,
                 'room_number' => $request->room_number,
                 'price' => $request->price,

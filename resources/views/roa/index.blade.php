@@ -74,7 +74,7 @@
                             </td>
                             <td>
                                 <b>Type: </b>{{$detail->type}}, <br>
-                                <b>Room Type: </b>{{$detail->roomType->name??'-'}}, <br>
+                                <b>Room Category: </b>{{$detail->roomCategory->name??'-'}}, <br>
                                 <b>Room Number: </b>{{$detail->room_number}}, <br>
                                 <b>Price Per Day: </b> {{$detail->price}}, <br>
                                 <b>Adult: </b> {{$detail->adult}}, <br>

@@ -18,9 +18,9 @@ class RoomOrApartmet extends Model
             $model->owner_id = session('owner_id');
         });
     }
-    public function roomType()
+    public function roomCategory()
     {
-        return $this->belongsTo(RoomType::class);
+        return $this->belongsTo(RoomCategory::class);
     }
     public function facilities()
     {

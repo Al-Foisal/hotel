@@ -44,11 +44,11 @@
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label class="form-label" for="exampleInputEmail1">Room/Apartment Type*</label>
-                        <select name="room_type_id" class="form-control select2" required>
+                        <label class="form-label" for="exampleInputEmail1">Room/Apartment Category*</label>
+                        <select name="room_category_id" class="form-control select2" required>
                             <option value="" selected>select option</option>
-                            @foreach($room_type as $type)
-                            <option value="{{$type->id}}" {{$item->room_type_id == $type->id ?'selected':''}}>{{$type->name}}</option>
+                            @foreach($room_category as $type)
+                            <option value="{{$type->id}}" {{$item->room_category_id == $type->id ?'selected':''}}>{{$type->name}}</option>
                             @endforeach
                         </select>
                     </div>
