@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item">
                             <a href="{{route('dashboard')}}">{{config('app.name')}}</a>
                         </li>
-                        <li class="breadcrumb-item active">Room Type</li>
+                        <li class="breadcrumb-item active">Room Category</li>
                     </ol>
                 </div><!--end col-->
             </div><!--end row-->
@@ -26,17 +26,17 @@
         <div class="card-header row">
             <div class="col-md-6">
                 <button type="button" class="text-capitalize btn btn-secondary btn-square btn-outline-dashed" data-bs-toggle="modal" data-bs-target="#createNewModal">
-                    Create new Room Type
+                    Create new Room Category
                 </button>
             </div>
             <div class="col-md-6">
-                <form action="{{route('rrs.roomType.index')}}" class="me-1">
+                <form action="{{route('rrs.roomCategory.index')}}" class="me-1">
                     <div class="input-group mb-3 table-search-box">
                         <input type="text" class="form-control" placeholder="Search" name="q" value="{{request()->q??''}}">
                         <button class="btn btn-secondary" title="Search" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
-                        <a class="btn btn-danger" href="{{route('rrs.roomType.index')}}" title="Reset">
+                        <a class="btn btn-danger" href="{{route('rrs.roomCategory.index')}}" title="Reset">
                             <i class="fas fa-redo-alt"></i>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
                     <thead>
                         <tr class="text-bolder">
                             <th>SL.</th>
-                            <th>Room Type</th>
+                            <th>Room Category</th>
                             <th class="d-none">Action</th>
                         </tr>
                     </thead>
@@ -75,12 +75,12 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div><!--end modal-header-->
                                             <div class="modal-body">
-                                                <form action="{{route('rrs.roomType.update',$item->id)}}" method="post" enctype="multipart/form-data">
+                                                <form action="{{route('rrs.roomCategory.update',$item->id)}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-md-12 mb-3">
-                                                            <label class="form-label" for="exampleInputEmail1">Room Type</label>
-                                                            <input type="text" class="form-control" placeholder="Enter room type" name="name" required value="{{$item->name??''}}">
+                                                            <label class="form-label" for="exampleInputEmail1">Room Category</label>
+                                                            <input type="text" class="form-control" placeholder="Enter room category" name="name" required value="{{$item->name??''}}">
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div><!--end row-->
@@ -108,12 +108,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div><!--end modal-header-->
             <div class="modal-body">
-                <form action="{{route('rrs.roomType.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('rrs.roomCategory.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label class="form-label" for="exampleInputEmail1">Room Type*</label>
-                            <input type="text" class="form-control" placeholder="Enter room type" name="name" required>
+                            <label class="form-label" for="exampleInputEmail1">Room Category*</label>
+                            <input type="text" class="form-control" placeholder="Enter room category" name="name" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>

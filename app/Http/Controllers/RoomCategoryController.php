@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoomType;
+use App\Models\Room;
+use App\Models\RoomCategory;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class RoomTypeController extends Controller
+class RoomCategoryController extends Controller
 {
     public function index(Request $request)
     {
         $data = [];
-        $data['items'] = RoomType::orWhereAny([
+        $data['items'] = RoomCategory::orWhereAny([
             'name',
         ], 'like', '%' . $request->q . '%')->get();
 
-        return view('room-type.index', $data);
+        return view('room-category.index', $data);
     }
 
     public function store(Request $request)
@@ -34,7 +35,7 @@ class RoomTypeController extends Controller
         DB::beginTransaction();
 
         try {
-            $user = RoomType::create([
+            $user = RoomCategory::create([
                 'name' => ucwords($request->name),
             ]);
 
@@ -60,7 +61,7 @@ class RoomTypeController extends Controller
         DB::beginTransaction();
 
         try {
-            $item = RoomType::where('id', $id)->first();
+            $item = RoomCategory::where('id', $id)->first();
             if (!$item) {
                 return back()->withToastError('No data found');
             }

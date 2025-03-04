@@ -81,8 +81,8 @@ function menuList()
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Room Type',
-                    'link'       => route('rrs.roomType.index'),
+                    'title'      => 'Room Category',
+                    'link'       => route('rrs.roomCategory.index'),
                     'permission' => 'Room_Type',
                 ],
                 [

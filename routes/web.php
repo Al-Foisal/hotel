@@ -8,7 +8,6 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomOrApartmentController;
 use App\Http\Controllers\RoomReservationController;
-use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierPaymentController;
 use App\Http\Controllers\ProductCategoryController;
@@ -20,6 +19,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\HrController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\WebsiteManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +36,7 @@ Route::controller(AuthController::class)->middleware('guest')->group(function ()
 });
 
 Route::middleware('auth')->group(function () {
-    Route::controller(RoomTypeController::class)->prefix('/rrs/room-types')->name('rrs.roomType.')->group(function () {
+    Route::controller(RoomCategoryController::class)->prefix('/rrs/room-categories')->name('rrs.roomCategory.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
