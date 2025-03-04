@@ -160,9 +160,7 @@
             </div>
         </div>
     </div>
-    <div>
-        Total Price: <span id="total">0.00</span>
-    </div>
+    
     <div class="card">
         <div class="card-header row">
             <div class="col-12">
@@ -473,7 +471,7 @@
                 var result = '<option value="">=select option=</option>';
 
                 $.each(data, function(index, value) {
-                    result += '<option value="' + value.id + '">' + value.room_number + '(' + value.room_type.name + ')' + '</option>';
+                    result += '<option value="' + value.id + '">' + value.room_number + '(' + value.room_category.name + ')' + '</option>';
                 })
                 console.log($(e).parent().parent().find(".rRoomOrApartmentNumber"));
 

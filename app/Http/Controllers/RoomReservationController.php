@@ -7,7 +7,7 @@ use App\Models\RoomOrApartmet;
 use App\Models\RoomReservation;
 use App\Models\RoomReservationDetails;
 use App\Models\RoomReservationOtherPersonDetails;
-use App\Models\RoomType;
+use App\Models\RoomCategory;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +23,7 @@ class RoomReservationController extends Controller
     public function create()
     {
         $data = [];
-        $data['room_type'] = RoomType::get();
+        $data['room_type'] = RoomCategory::get();
         return view('room-reservation.create', $data);
     }
     public function store(Request $request)
@@ -133,11 +133,11 @@ class RoomReservationController extends Controller
             ]);
         }
     }
-  
+
     public function edit($id)
     {
         $data = [];
-        $data['room_type'] = RoomType::get();
+        $data['room_type'] = RoomCategory::get();
         $data['rr'] = RoomReservation::where('id', $id)->first();
         if (!$data['rr']) {
             return redirect()->back()->withToastError('No data found!');
@@ -147,7 +147,7 @@ class RoomReservationController extends Controller
 
     public function getROAByType(Request $request)
     {
-        $data = RoomOrApartmet::where('type', $request->type)->with('roomType')->get();
+        $data = RoomOrApartmet::where('type', $request->type)->with('roomCategory')->get();
         return $data;
     }
     public function getSingleRoomDetails(Request $request)
