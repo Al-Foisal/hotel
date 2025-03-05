@@ -28,13 +28,13 @@ Route::get('/hotel-facilities', function () {
     return Facility::get();
 });
 Route::get('/room-or-apartments', function (Request $request) {
-        return RoomOrApartmet::where('status', 1)->with('roomType')->get();
+        return RoomOrApartmet::where('status', 1)->with('roomCategory')->get();
     
     $from_date=json_encode($request->from_date);
     $to_date=json_encode($request->to_date);
     // return $from_date;
     if(!$from_date && !$to_date){
-        return RoomOrApartmet::where('status', 1)->with('roomType')->get();
+        return RoomOrApartmet::where('status', 1)->with('roomCategory')->get();
     } else {
         $booked_room=RoomReservation::whereDate('check_in','>=',$from_date)->whereDate('check_out','<=',$form_date)->pluck('id')->toArray();
 
@@ -44,7 +44,7 @@ Route::get('/room-or-apartments', function (Request $request) {
     }
 });
 Route::get('/room-or-apartment-details/{id}', function ($id) {
-    return RoomOrApartmet::where('status', 1)->where('id',$id)->with('roomType','facilities')->first();
+    return RoomOrApartmet::where('status', 1)->where('id',$id)->with('roomCategory','facilities')->first();
 });
 Route::post('/save-message', function (Request $request) {
     // return $request['name'];
