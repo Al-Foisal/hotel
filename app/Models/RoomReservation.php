@@ -29,11 +29,16 @@ class RoomReservation extends Model
         'check_out' => 'date',
     ];
 
-    public function rooms(){
+    public function rooms()
+    {
         return $this->hasMany(RoomReservationDetails::class);
     }
-
-    public function roomPersonDetails(){
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+    public function roomPersonDetails()
+    {
         return $this->hasMany(RoomReservationOtherPersonDetails::class);
     }
     public function createdBy()
