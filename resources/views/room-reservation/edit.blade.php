@@ -173,6 +173,7 @@
         </div><!--end card-header-->
         <div class="card-body" id="multipleSelectedCustomerInfo">
             <div class="row">
+                <input type="hidden" id="customer_id" value="{{$rr->customer->id}}">
                 <div class="col-md-4 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Name*</label>
                     <input type="text" class="form-control " id="rcName" placeholder="Enter name" value="{{$rr->customer->name??''}}">
@@ -327,7 +328,7 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary" style="float: right;" onclick="submitRoomReservation(this)" data-url="{{route('roomReservation.store')}}" id="submitBill" data-bs-toggle="modal" data-bs-target="#billFullScreenModal">Submit</button>
+    <!-- <button type="button" class="btn btn-primary" style="float: right;" onclick="submitRoomReservation(this)" data-url="{{route('roomReservation.update')}}" data-rr_id="{{$rr->id}}" id="submitBill" data-bs-toggle="modal" data-bs-target="#billFullScreenModal">Submit</button> -->
 
     <div class="card">
         <div class="row m-3">
@@ -339,7 +340,7 @@
                 <div class="card-body">
                     <div class="input-group mb-3">
                         <span class="input-group-text-monetary bg-primary" id="basic-addon1">
-                            Total Amount
+                            Total Amount {{$rr->total??''}}
                         </span>
                         <input type="number" class="form-control" id="totalBillingAmount" readonly aria-describedby="basic-addon1" value="{{$rr->total??''}}">
                     </div>
@@ -355,8 +356,8 @@
                         </span>
                         <input type="number" class="form-control" id="totalBillingDiscount" value="{{$rr->discount??''}}" aria-describedby="basic-addon1" onkeyup="calculateTotalBillingAmount()">
                         <select id="totalBillingDiscountType" class="bg-warning" onchange="calculateTotalBillingAmount()">
-                            <option value="Flat" {{$rr->discount_type?'Flat':''}}>Flat</option>
-                            <option value="Percentage" {{$rr->discount_type?'Percentage':''}}>Percentage</option>
+                            <option value="Flat" {{$rr->discount_type=='Flat'?'selected':''}}>Flat</option>
+                            <option value="Percentage" {{$rr->discount_type=='Percentage'?'selected':''}}>Percentage</option>
                         </select>
                     </div>
                     <div class="input-group mb-3">
@@ -388,7 +389,7 @@
         </div><!--end col-->
 
         <div class="m-3">
-            <button type="button" class="btn btn-primary" style="float: right;" onclick="submitRoomReservation(this)" data-url="{{route('roomReservation.store')}}" id="submitBill" data-bs-toggle="modal" data-bs-target="#billFullScreenModal">Submit</button>
+            <button type="button" class="btn btn-primary" style="float: right;" onclick="submitRoomReservation(this)" data-url="{{route('roomReservation.update')}}" data-rr_id="{{$rr->id}}" data-bs-toggle="modal" data-bs-target="#billFullScreenModal" disabled id="us">Submit</button>
         </div>
     </div>
 </div> <!-- end row -->
@@ -397,6 +398,12 @@
 
 @section('js')
 <script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            calculateTotalBillingAmount();
+            $("#us").prop('disabled', false);
+        }, 2000);
+    });
     var aaRoom = 1;
 
     function addAnotherRoom() {
@@ -613,6 +620,7 @@
     function submitRoomReservation(e) {
 
         var url = $(e).data('url');
+        var rr_id = $(e).data('rr_id');
 
         //reservation details
         var rCheckIn = $("#rCheckIn").val();
@@ -658,6 +666,7 @@
         });
 
         //customer info
+        var customer_id = $("#customer_id").val();
         var rcName = $("#rcName").val();
         var rcEmail = $("#rcEmail").val();
         var rcPhone = $("#rcPhone").val();
@@ -706,6 +715,8 @@
             url: url,
             type: "POST",
             data: {
+                rr_id: rr_id,
+
                 rCheckIn: rCheckIn,
                 rCheckOut: rCheckOut,
                 rArivalFrom: rArivalFrom,
@@ -731,6 +742,7 @@
                 rChild: rChild,
                 rPrice: rPrice,
 
+                customer_id: customer_id,
                 rcName: rcName,
                 rcEmail: rcEmail,
                 rcPhone: rcPhone,
