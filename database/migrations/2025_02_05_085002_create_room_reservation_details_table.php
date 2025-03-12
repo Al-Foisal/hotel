@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('room_or_apartment_id');
             $table->unsignedInteger('adult')->default(0);
             $table->unsignedInteger('child')->default(0);
+            $table->unsignedInteger('belonging_days')->default(0);
             $table->unsignedInteger('price')->default(0);
             $table->timestamps();
         });

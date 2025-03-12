@@ -10,6 +10,6 @@ class RoomReservationDetails extends Model
 
     public function singleRoom()
     {
-        return $this->belongsTo(RoomOrApartmet::class, 'room_reservation_id', 'id');
+        return $this->belongsTo(RoomOrApartmet::class, 'room_or_apartment_id', 'id');
     }
 }

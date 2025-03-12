@@ -98,6 +98,7 @@ class RoomReservationController extends Controller
                             'room_or_apartment_id' => $request->rRoomOrApartmentNumber[$key],
                             'adult' => $request->rAdult[$key],
                             'child' => $request->rChild[$key],
+                            'belonging_days' => $request->rBelongingDays[$key],
                             'price' => $request->rPrice[$key],
                         ]);
                     }
@@ -148,7 +149,7 @@ class RoomReservationController extends Controller
     public function update(Request $request)
     {
 
-        dd($request->all());
+        // dd($request->all());
         if (
             $request->rRoomOrApartmentType == null ||
             $request->rRoomOrApartmentNumber == null ||
@@ -178,7 +179,7 @@ class RoomReservationController extends Controller
                 'identity_number' => $request->rcIDNumber,
             ]);
 
-            $reservation = RoomReservation::create([
+            $reservation->update([
                 'check_in' => $request->rCheckIn,
                 'check_out' => $request->rCheckOut,
                 'arival_from' => $request->rArivalFrom,
@@ -200,6 +201,7 @@ class RoomReservationController extends Controller
             ]);
 
             if ($request->rRoomOrApartmentType && $request->rRoomOrApartmentNumber) {
+                RoomReservationDetails::where('room_reservation_id', $reservation->id)->delete();
                 foreach ($request->rRoomOrApartmentType as $key => $type) {
                     if ($type && $request->rRoomOrApartmentNumber[$key]) {
                         RoomReservationDetails::create([
@@ -208,6 +210,7 @@ class RoomReservationController extends Controller
                             'room_or_apartment_id' => $request->rRoomOrApartmentNumber[$key],
                             'adult' => $request->rAdult[$key],
                             'child' => $request->rChild[$key],
+                            'belonging_days' => $request->rBelongingDays[$key],
                             'price' => $request->rPrice[$key],
                         ]);
                     }
@@ -215,6 +218,7 @@ class RoomReservationController extends Controller
             }
 
             if ($request->rOPName && $request->rOPGender) {
+                RoomReservationOtherPersonDetails::where('room_reservation_id', $reservation->id)->delete();
                 foreach ($request->rOPName as $o_key => $name) {
                     if ($name && $request->rOPGender[$o_key]) {
                         RoomReservationOtherPersonDetails::create([
@@ -233,7 +237,7 @@ class RoomReservationController extends Controller
             DB::commit();
             return response()->json([
                 'status' => true,
-                'message' => 'Reservation completed successfully'
+                'message' => 'Reservation updated successfully'
             ]);
         } catch (Exception $th) {
             DB::rollBack();
@@ -246,7 +250,10 @@ class RoomReservationController extends Controller
 
     public function getROAByType(Request $request)
     {
-        $data = RoomOrApartmet::where('type', $request->type)->with('roomCategory')->get();
+        $booked_room = RoomReservation::whereDate('check_in', '>=', $request->checkIn)->whereDate('check_out', '<=', $request->checkIn)->pluck('id')->toArray();
+        $room_id = RoomReservationDetails::whereIn('room_reservation_id', $booked_room)->pluck('room_or_apartment_id')->toArray();
+        $data = RoomOrApartmet::where('type', $request->type)->with('roomCategory')->whereNotIn('id', $room_id)->get();
+
         return $data;
     }
     public function getSingleRoomDetails(Request $request)

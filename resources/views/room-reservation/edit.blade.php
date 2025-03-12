@@ -128,15 +128,13 @@
             </div>
         </div><!--end card-header-->
         <div class="card-body" id="multipleSelectedAreaRoom">
-            @if($rr->rooms->count()>0)
-            @foreach($rr->rooms as $room)
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Type</label>
                     <select class="select2 rRoomOrApartmentType" style="width: 100%;" onchange="getROAByType(this)" data-url="{{route('roomReservation.getROAByType')}}">
                         <option value="">select option</option>
-                        <option value="Room" {{$room->room_type=='Room'?'selected':''}}>Room</option>
-                        <option value="Apartment" {{$room->room_type=='Apartment'?'selected':''}}>Apartment</option>
+                        <option value="Room">Room</option>
+                        <option value="Apartment">Apartment</option>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3">
@@ -146,18 +144,57 @@
                 </div>
                 <div class="col-md-1 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Adult</label>
-                    <input type="number" class="form-control rAdult" placeholder="0" value="{{$room->adult??$room->singleRoom->adult}}">
+                    <input type="number" class="form-control rAdult" placeholder="0">
                 </div>
                 <div class="col-md-1 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Child</label>
-                    <input type="number" class="form-control rChild" placeholder="0" value="{{$room->child??$room->singleRoom->child}}">
+                    <input type="number" class="form-control rChild" placeholder="0">
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-1 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Belonging Days</label>
+                    <input type="number" class="form-control rBelongingDays" placeholder="0" readonly>
+                </div>
+                <div class="col-md-2 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Amount</label>
-                    <input type="number" class="form-control rPrice" placeholder="0" value="{{$room->price??$room->singleRoom->price}}">
+                    <input type="number" class="form-control rPrice" placeholder="0">
                 </div>
                 <div class="col-md-1 mb-3">
                     <button type="button" class="btn btn-info" onclick="addAnotherRoom(this)" style="margin-top: 1.7rem;">+</button>
+                </div>
+            </div>
+            @if($rr->rooms->count()>0)
+            @foreach($rr->rooms as $room)
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Type</label>
+                    <select class="select2 rRoomOrApartmentType" style="width: 100%;">
+                        <option value="{{$room->room_type}}" selected>{{$room->room_type}}</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Room/Apartment Number</label>
+                    <select class="select2 rRoomOrApartmentNumber" style="width: 100%;">
+                        <option value="{{$room->room_reservation_id}}" selected>R: {{$room->singleRoom->room_number??''}} = {{$room->price}} = ({{$room->singleRoom->roomCategory->name??''}})</option>
+                    </select>
+                </div>
+                <div class="col-md-1 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Adult</label>
+                    <input type="number" class="form-control rAdult" placeholder="0" value="{{$room->adult??$room->singleRoom->adult}}" readonly>
+                </div>
+                <div class="col-md-1 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Child</label>
+                    <input type="number" class="form-control rChild" placeholder="0" value="{{$room->child??$room->singleRoom->child}}" readonly>
+                </div>
+                <div class="col-md-1 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Belonging Days</label>
+                    <input type="number" class="form-control rBelongingDays" placeholder="0" value="{{$room->belonging_days}}" readonly>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Amount</label>
+                    <input type="number" class="form-control rPrice" placeholder="0" value="{{$room->price??$room->singleRoom->price}}" readonly>
+                </div>
+                <div class="col-md-1 mb-3">
+                    <button type="button" class="ibtnDel btn btn-danger del" style="margin-top: 1.8rem;">X</button>
                 </div>
             </div>
             @endforeach
@@ -435,7 +472,11 @@
                     <label class="form-label" for="exampleInputEmail1">Child</label>
                     <input type="number" class="form-control rChild" placeholder="0">
                 </div>
-                <div class="col-md-3 mb-3">
+                <div class="col-md-1 mb-3">
+                    <label class="form-label" for="exampleInputEmail1">Belonging Days</label>
+                    <input type="number" class="form-control rBelongingDays" placeholder="0" readonly>
+                </div>
+                <div class="col-md-2 mb-3">
                     <label class="form-label" for="exampleInputEmail1">Amount</label>
                     <input type="number" class="form-control rPrice" placeholder="0">
                 </div>
@@ -515,11 +556,16 @@
         var url = $(e).data('url');
         var type = $(e).val();
 
+        var checkIn = $("#rCheckIn").val();
+        var checkOut = $("#rCheckOut").val();
+
         $.ajax({
             url: url,
             type: "POST",
             data: {
                 type: type,
+                checkIn: checkIn,
+                checkOut: checkOut,
             },
             dataType: "json",
             success: function(data) {
@@ -527,7 +573,7 @@
                 var result = '<option value="">=select option=</option>';
 
                 $.each(data, function(index, value) {
-                    result += '<option value="' + value.id + '">' + value.room_number + '(' + value.room_type.name + ')' + '</option>';
+                    result += '<option value="' + value.id + '">' + 'R: ' + value.room_number + ' = ' + value.price + 'TK = ' + '(' + value.room_category.name + ')' + '</option>';
                 })
                 console.log($(e).parent().parent().find(".rRoomOrApartmentNumber"));
 
@@ -549,9 +595,17 @@
             },
             dataType: "json",
             success: function(data) {
+                let date1 = new Date($("#rCheckIn").val());
+                let date2 = new Date($("#rCheckOut").val());
+
+                let diffTime = Math.abs(date2 - date1);
+                diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                form_total = Math.ceil(diffDays * data.price);
+
                 $(e).parent().parent().find(".rAdult").val(data.adult ?? 0);
                 $(e).parent().parent().find(".rChild").val(data.child ?? 0);
-                $(e).parent().parent().find(".rPrice").val(data.price ?? 0);
+                $(e).parent().parent().find(".rBelongingDays").val(diffDays ?? 0);
+                $(e).parent().parent().find(".rPrice").val(form_total ?? 0);
 
                 updateTotal();
             },
@@ -637,6 +691,7 @@
         var rRoomOrApartmentNumber = [];
         var rAdult = [];
         var rChild = [];
+        var rBelongingDays = [];
         var rPrice = [];
 
         $(".rRoomOrApartmentType").each(function() {
@@ -657,6 +712,11 @@
         $(".rChild").each(function() {
             if ($(this).val() != null && $(this).val().trim() != '') {
                 rChild.push($(this).val());
+            }
+        });
+        $(".rBelongingDays").each(function() {
+            if ($(this).val() != null && $(this).val().trim() != '') {
+                rBelongingDays.push($(this).val());
             }
         });
         $(".rPrice").each(function() {
@@ -740,6 +800,7 @@
                 rRoomOrApartmentNumber: rRoomOrApartmentNumber,
                 rAdult: rAdult,
                 rChild: rChild,
+                rBelongingDays: rBelongingDays,
                 rPrice: rPrice,
 
                 customer_id: customer_id,
