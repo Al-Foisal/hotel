@@ -135,6 +135,13 @@ class RoomReservationController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $item = RoomReservation::findOrFail($id);
+
+        return view('room-reservation.show', compact('item'));
+    }
+
     public function edit($id)
     {
         $data = [];

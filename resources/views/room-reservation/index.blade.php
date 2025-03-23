@@ -90,7 +90,7 @@
                             <td>{{number_format($item->due)}}</td>
                             <td>{{$item->created_at->format('d-m-Y h:i:s A')}}</td>
                             <td>
-                                <a href="{{route('roomReservation.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <br>
+                                <a href="{{route('roomReservation.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <a href="{{route('roomReservation.show',$item->id)}}" class="btn btn-info btn-sm mb-1">Show</a><br>
                                 {{--<form action="{{route('roomReservation.status',$item->id)}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-{{$item->status==1?'danger':'success'}} btn-sm mb-1" onclick="return confirm('Are you sure want {{$item->status==1?'Inactive':'Active'}} this item?')">{{$item->status==1?'Inactive':'Active'}}</button>
