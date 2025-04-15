@@ -163,12 +163,6 @@ function menuList()
                 ],
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Supplier Payment',
-                    'link'       => route('rrs.supplier-payment.index'),
-                    'permission' => 'Bed_Type',
-                ],
-                [
-                    'sideIcon'   => '',
                     'title'      => 'Product Category',
                     'link'       => route('rrs.product-category.index'),
                     'permission' => 'Bed_Type',

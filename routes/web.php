@@ -8,18 +8,14 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomOrApartmentController;
 use App\Http\Controllers\RoomReservationController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\SupplierPaymentController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\StockController;
 use App\Http\Controllers\SystemUserController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\HrController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\PromoCodeController;
 use App\Http\Controllers\RoomCategoryController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WebsiteManagementController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -52,30 +48,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
-    });
-
-    Route::controller(SupplierController::class)->prefix('/rrs/supplier')->name('rrs.supplier.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(SupplierPaymentController::class)->prefix('/rrs/supplier-payment')->name('rrs.supplier-payment.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(ProductCategoryController::class)->prefix('/rrs/product-category')->name('rrs.product-category.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(ProductController::class)->prefix('/rrs/product')->name('rrs.product.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(PurchaseController::class)->prefix('/rrs/purchase')->name('rrs.purchase.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(StockController::class)->prefix('/rrs/stock')->name('rrs.stock.')->group(function () {
-        Route::get('/', 'index')->name('index');
     });
 
     Route::controller(SystemUserController::class)->prefix('/system-user')->name('systemUser.')->group(function () {
@@ -131,7 +103,18 @@ Route::middleware('auth')->group(function () {
         Route::post('/get-roa-by-type', 'getROAByType')->name('getROAByType');
         Route::post('/get-single-room-details', 'getSingleRoomDetails')->name('getSingleRoomDetails');
     });
-
+    Route::controller(SupplierController::class)->prefix('/is/supplier')->name('is.supplier.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ProductCategoryController::class)->prefix('/is/product-category')->name('is.productCategory.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
 
     //----------- HR (start)-------------------
 
