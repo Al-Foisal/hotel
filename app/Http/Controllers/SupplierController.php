@@ -20,11 +20,15 @@ class SupplierController extends Controller
             'phone',
             'contact_person_name',
             'contact_person_phone'
-        ], 'like', '%' . $request->q . '%')->get();
+        ], 'like', '%' . $request->q . '%')->paginate();
 
         return view('supplier.index', $data);
     }
-
+    public function create()
+    {
+        $data = [];
+        return view('supplier.create', $data);
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -56,7 +60,7 @@ class SupplierController extends Controller
             ) {
                 foreach ($request->payment_type as $key => $type) {
                     SupplierPayment::create([
-                        'suplier_id' => $item->id,
+                        'supplier_id' => $item->id,
                         'payment_type' => $type,
                         'account_name' => $request->account_name[$key],
                         'branch' => $request->branch[$key],
@@ -73,6 +77,24 @@ class SupplierController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $item = Supplier::where('id', $id)->first();
+        if (!$item) {
+            return back()->withToastError('No data found');
+        }
+
+        return view('supplier.show', compact('item'));
+    }
+    public function edit($id)
+    {
+        $item = Supplier::where('id', $id)->first();
+        if (!$item) {
+            return back()->withToastError('No data found');
+        }
+
+        return view('supplier.edit', compact('item'));
+    }
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -110,13 +132,20 @@ class SupplierController extends Controller
                 $request->account_number
             ) {
                 foreach ($request->payment_type as $key => $type) {
-                    SupplierPayment::create([
-                        'suplier_id' => $item->id,
-                        'payment_type' => $type,
-                        'account_name' => $request->account_name[$key],
-                        'branch' => $request->branch[$key],
-                        'account_number' => $request->account_number[$key],
-                    ]);
+                    if (
+                        $type &&
+                        $request->account_name[$key] &&
+                        $request->branch[$key] &&
+                        $request->account_number[$key]
+                    ) {
+                        SupplierPayment::create([
+                            'supplier_id' => $item->id,
+                            'payment_type' => $type,
+                            'account_name' => $request->account_name[$key],
+                            'branch' => $request->branch[$key],
+                            'account_number' => $request->account_number[$key],
+                        ]);
+                    }
                 }
             }
 
