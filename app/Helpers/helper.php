@@ -170,8 +170,8 @@ function menuList()
                 [
                     'sideIcon'   => '',
                     'title'      => 'Product',
-                    'link'       => '',
-                    'permission' => 'Facility',
+                    'link'       => route('product.index'),
+                    'permission' => 'Product',
                 ],
             ],
 
@@ -187,8 +187,8 @@ function menuList()
                 [
                     'sideIcon'   => '',
                     'title'      => 'Purchase',
-                    'link'       => '',
-                    'permission' => 'Room_Type',
+                    'link'       => route('purchase.index'),
+                    'permission' => 'Purchase',
                 ],
                 [
                     'sideIcon'   => '',

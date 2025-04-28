@@ -14,11 +14,14 @@ use App\Http\Controllers\HrController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RoomCategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WebsiteManagementController;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 Route::controller(AuthController::class)->middleware('guest')->group(function () {
     Route::get('/', 'login')->name('login');
@@ -115,6 +118,24 @@ Route::middleware('auth')->group(function () {
     Route::controller(ProductCategoryController::class)->prefix('/is/product-category')->name('is.productCategory.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(PurchaseController::class)->prefix('/purchase')->name('purchase.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(ProductController::class)->prefix('/product')->name('product.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
@@ -220,3 +241,19 @@ Route::middleware('auth')->group(function () {
         return to_route('login');
     })->name('logout');
 });
+
+Route::get('/get-product-details', function (Request $request) {
+    $product = Product::find($request->id);
+
+    if ($product) {
+        return response()->json([
+            'success' => true,
+            'data' => $product,
+        ]);
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Product not found',
+        ], 404);
+    }
+})->name('getProductDetails');
