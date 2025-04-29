@@ -22,6 +22,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResturantTableSetupController;
 
 Route::controller(AuthController::class)->middleware('guest')->group(function () {
     Route::get('/', 'login')->name('login');
@@ -136,6 +137,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::get('/show/{id}', 'show')->name('show');
         Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ResturantTableSetupController::class)->prefix('/resturant/table-setup')->name('resturant.tableSetup.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
     });

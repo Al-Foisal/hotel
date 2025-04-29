@@ -150,6 +150,34 @@ function menuList()
 
         [
             'sideIcon'   => 'thermometer',
+            'title'      => 'Resturant Management',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Resturant_Management',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Supplier',
+                    'link'       => route('is.supplier.index'),
+                    'permission' => 'Supplier',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Product Category',
+                    'link'       => route('is.productCategory.index'),
+                    'permission' => 'Product_Category',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Table setup',
+                    'link'       => route('resturant.tableSetup.index'),
+                    'permission' => 'Table_setup',
+                ],
+            ],
+
+        ],
+        [
+            'sideIcon'   => 'thermometer',
             'title'      => 'Inventory Setting',
             'link'       => '',
             'hasSub'     => true,
