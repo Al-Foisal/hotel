@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('name');
             $table->double('price');
-            $table->double('discount')->default(0);
             $table->string('formation_duration')->nullable();
             $table->timestamps();
         });

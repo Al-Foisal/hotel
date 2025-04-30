@@ -163,9 +163,9 @@ function menuList()
                 ],
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Product Category',
-                    'link'       => route('is.productCategory.index'),
-                    'permission' => 'Product_Category',
+                    'title'      => 'Menu Item',
+                    'link'       => route('resturant.menuItem.index'),
+                    'permission' => 'Menu_Item',
                 ],
                 [
                     'sideIcon'   => '',
