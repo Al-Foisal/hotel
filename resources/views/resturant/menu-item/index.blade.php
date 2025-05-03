@@ -59,6 +59,7 @@
                                 <th>Item Name</th>
                                 <th>Price</th>
                                 <th>Formation Duration</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -72,6 +73,13 @@
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->price}}</td>
                                 <td>{{$item->formation_duration}}</td>
+                                <td>
+                                    @if($item->status == 'Active')
+                                    <span class="badge bg-success">{{$item->status}}</span>
+                                    @else
+                                    <span class="badge bg-danger">{{$item->status}}</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="d-flex justify-content-start">
                                         <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal{{$item->id}}">Edit</button>
@@ -104,6 +112,14 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-6 mb-3">
+                                                                <label class="form-label" for="status">Status*</label>
+                                                                <select class="form-control" name="status" id="status" required>
+                                                                    <option value="" disabled selected>Select option</option>
+                                                                    <option value="Active" {{ $item->status == 'Active' ? 'selected' : '' }}>Active</option>
+                                                                    <option value="Inactive" {{ $item->status == 'Inactive' ? 'selected' : '' }}>Inactive</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
                                                                 <label class="form-label" for="exampleInputEmail1">Item Name*</label>
                                                                 <input type="text" class="form-control" placeholder="Enter item name" name="name" required value="{{$item->name??''}}">
                                                             </div>
@@ -115,7 +131,7 @@
                                                                 <label class="form-label" for="exampleInputEmail1">Formation Duration</label>
                                                                 <input type="text" class="form-control" placeholder="Enter start floor number" name="formation_duration" value="{{$item->formation_duration??''}}">
                                                             </div>
-                                                            <div class="col-md-12 mb-3">
+                                                            <div class="col-md-6 mb-3">
                                                                 <label class="form-label" for="exampleInputEmail1">Image</label>
                                                                 <input type="file" class="form-control" name="image">
                                                                 @if($item->image)
@@ -163,6 +179,14 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
+                            <label class="form-label" for="status">Status*</label>
+                            <select class="form-control" name="status" id="status" required>
+                                <option value="" disabled selected>Select option</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label class="form-label" for="exampleInputEmail1">Item Name*</label>
                             <input type="text" class="form-control" placeholder="Enter item name" name="name" required value="{{old('name')}}">
                         </div>
@@ -174,7 +198,7 @@
                             <label class="form-label" for="exampleInputEmail1">Formation Duration</label>
                             <input type="text" class="form-control" placeholder="Enter start floor number" name="formation_duration" value="{{old('formation_duration')}}">
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label class="form-label" for="exampleInputEmail1">Image</label>
                             <input type="file" class="form-control" name="image">
                         </div>

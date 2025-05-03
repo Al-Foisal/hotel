@@ -34,6 +34,7 @@ class ResturantMenuItemController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'formation_duration' => $request->formation_duration,
+            'status' => $request->status,
             'image' => $image,
         ]);
         return back();
@@ -60,6 +61,7 @@ class ResturantMenuItemController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'formation_duration' => $request->formation_duration,
+            'status' => $request->status,
             'image' => $image,
         ]);
 
