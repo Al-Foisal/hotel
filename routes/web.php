@@ -22,6 +22,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResturantBillingController;
 use App\Http\Controllers\ResturantMenuItemCategoryController;
 use App\Http\Controllers\ResturantMenuItemController;
 use App\Http\Controllers\ResturantTableSetupController;
@@ -141,6 +142,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ResturantBillingController::class)->prefix('/resturant-billing')->name('resturantBilling.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+        Route::post('/get-menu-item', 'getMenuItem')->name('getMenuItem');
     });
     Route::controller(ResturantMenuItemController::class)->prefix('/resturant/menu-item')->name('resturant.menuItem.')->group(function () {
         Route::get('/', 'index')->name('index');

@@ -157,9 +157,9 @@ function menuList()
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Supplier',
-                    'link'       => route('is.supplier.index'),
-                    'permission' => 'Supplier',
+                    'title'      => 'Billing',
+                    'link'       => route('resturantBilling.create'),
+                    'permission' => 'Resturant_Billing',
                 ],
                 [
                     'sideIcon'   => '',
