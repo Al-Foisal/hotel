@@ -46,7 +46,66 @@
         </div><!--end card-header-->
         <div class="card">
             <div class="card-body">
-
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Invoice Number</th>
+                            <th>Table Number</th>
+                            <th>TIC/TQ</th>
+                            <th>Total</th>
+                            <th>Discount</th>
+                            <th>Subtotal</th>
+                            <th>Created By</th>
+                            <th>Created Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($billings as $key => $billing)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $billing->invoice_number }}</td>
+                            <td>{{ $billing->table->table_number??'-' }}</td>
+                            <td>
+                                <div class="badge badge-soft-primary fw-bolder" title="Total Item Count">
+                                    {{ $billing->itemDetails->count() }}
+                                </div>
+                                /
+                                <div class="badge badge-soft-warning fw-bolder" title="Total Quantity">
+                                    {{ $billing->itemDetails->sum('menu_item_quantity') }}
+                                </div>
+                            </td>
+                            <td>{{ number_format($billing->total,2) }}</td>
+                            <td>{{ number_format($billing->discount_amount,2) }}({{ $billing->discount_type }})</td>
+                            <td>{{ number_format($billing->subtotal,2) }}</td>
+                            <td>{{ $billing->createdBy->name??'Operator' }}</td>
+                            <td>{{ $billing->created_at->format('d-m-Y') }}</td>
+                            <td>
+                                <a href="{{ route('resturantBilling.show', $billing->id) }}" class="btn btn-info btn-sm" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ route('resturantBilling.edit', $billing->id) }}" class="btn btn-warning btn-sm" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('resturantBilling.delete', $billing->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="9" class="text-center">No data available</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+                <div class="mt-3">
+                    {{ $billings->links() }}
+                </div>
             </div>
         </div>
     </div><!--end card-->

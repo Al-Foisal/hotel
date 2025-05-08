@@ -11,9 +11,19 @@ use Illuminate\Support\Facades\DB;
 
 class ResturantBillingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('resturant.billing.index');
+        $data = [];
+        $search = $request->input('q');
+        $data['billings'] = ResturantBilling::with('itemDetails')
+            ->orWhereAny([
+                'invoice_number',
+                'customer_name',
+                'customer_phone',
+            ], 'like', '%' . $search . '%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(50);
+        return view('resturant.billing.index', $data);
     }
 
     public function create()
