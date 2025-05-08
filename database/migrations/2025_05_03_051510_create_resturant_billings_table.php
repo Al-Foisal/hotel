@@ -13,19 +13,16 @@ return new class extends Migration
     {
         Schema::create('resturant_billings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('table_id')->nullable();
+            $table->unsignedBigInteger('room_or_apartment_id')->nullable();
             $table->string('customer_name')->nullable();
             $table->string('customer_phone')->nullable();
-            $table->string('customer_address')->nullable();
             $table->unsignedBigInteger('total')->default(0);
-            $table->unsignedBigInteger('vat')->default(0);
-            $table->unsignedBigInteger('vat_amount')->default(0);
-            $table->unsignedBigInteger('discount')->default(0);
             $table->enum('discount_type',["Flat","Percentage"])->default('Flat');
             $table->unsignedBigInteger('discount_amount')->default(0);
             $table->unsignedBigInteger('subtotal')->default(0);
             $table->unsignedBigInteger('paid_amount')->default(0);
-            $table->unsignedBigInteger('due')->default(0);
-            $table->unsignedBigInteger('changes')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();

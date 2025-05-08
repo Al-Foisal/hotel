@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ResturantBilling;
 use App\Models\ResturantMenuItemCategory;
+use App\Models\ResturantTableSetup;
+use App\Models\RoomOrApartmet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResturantBillingController extends Controller
 {
@@ -15,12 +19,57 @@ class ResturantBillingController extends Controller
     public function create()
     {
         $data = [];
-        $data['categories'] = ResturantMenuItemCategory::with([
-            'menuItems' => function ($query) {
-                $query->where('status', 'active');
-            }
-        ])->get();
+        $data['tables'] = ResturantTableSetup::where('status', 'Available')->get();
+        $data['rooms'] = RoomOrApartmet::get();
         return view('resturant.billing.create', $data);
+    }
+
+    public function store(Request $request)
+    {
+        $latest_bill = DB::table('resturant_billings')->orderBy('id', 'desc')->first();
+
+        if (isset($latest_bill)) {
+            $invoice_number = date("y") . str_pad((int) $latest_bill->invoice + 1, 5, "0", STR_PAD_LEFT);
+            $invoice        = 1 + $latest_bill->invoice;
+        } else {
+            $invoice_number = date("y") . str_pad((int) 1, 5, "0", STR_PAD_LEFT);
+            $invoice        = 1;
+        }
+
+        $billing = ResturantBilling::create([
+            'invoice_number' => $invoice_number,
+            'invoice' => $invoice,
+            'customer_id' => $request->customer_id,
+            'table_id' => $request->table_id,
+            'room_or_apartment_id' => $request->room_or_apartment_id,
+            'customer_name' => $request->customer_name,
+            'customer_phone' => $request->customer_phone,
+            'total' => $request->totalAmount,
+            'discount_type' => $request->discountType,
+            'discount_amount' => $request->discountValue,
+            'subtotal' => $request->subTotal,
+            'paid_amount' => $request->paidAmount,
+            'created_by' => auth()->user()->id,
+        ]);
+
+        foreach ($request->cart as $item) {
+            $billing->itemDetails()->create([
+                'resturant_billing_id' => $item['itemId'],
+                'menu_item_id' => $item['itemId'],
+                'menu_item_name' => $item['itemName'],
+                'menu_item_quantity' => $item['itemQuantity'],
+                'menu_item_price' => $item['itemUnitPrice'],
+                'menu_item_total' => $item['itemTotalPrice'],
+            ]);
+        }
+
+        $data = ResturantBilling::with(
+            'itemDetails',
+            'createdBy',
+        )
+            ->where('id', $billing->id)
+            ->first();
+        return $data;
     }
 
     public function show($id)
@@ -50,7 +99,7 @@ class ResturantBillingController extends Controller
                     }
                 }
             )->get();
-            // dd($categories);    
+        // dd($categories);    
         return view('resturant.billing.menu_items', compact('categories'));
     }
 }

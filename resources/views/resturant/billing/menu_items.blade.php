@@ -12,7 +12,7 @@
             </div>
             @else
             @foreach($category->menuItems as $item)
-            <div class="col-md-4" style="cursor: pointer;">
+            <div class="col-md-4" style="cursor: pointer;" data-item_id="{{ $item->id }}" data-item_name="{{ $item->name }}" data-item_price="{{ $item->price }}" onclick="addToCart(this)">
                 <div class="card-body border">
                     <div class="text-center">
                         <img src="{{asset($item->image)}}" height="70px" width="70px" alt="logo" class=" mb-2">
