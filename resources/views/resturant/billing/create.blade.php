@@ -162,6 +162,7 @@
                             <div class="col-md-6 text-end">
                                 <p><strong>Table:</strong> <span id="invoiceTable"></span></p>
                                 <p><strong>Room:</strong> <span id="invoiceRoom"></span></p>
+                                <p><strong>Created:</strong> <span id="invoiceCreated"></span></p>
                             </div>
                         </div>
                         <table class="table table-bordered">

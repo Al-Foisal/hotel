@@ -84,7 +84,17 @@ class ResturantBillingController extends Controller
 
     public function show($id)
     {
-        return view('resturant.billing.show', compact('id'));
+        $data = [];
+        $data['billing'] = ResturantBilling::with(
+            'itemDetails',
+            'createdBy',
+            'updatedBy',
+            'table',
+            'roomOrApartment'
+        )
+            ->where('id', $id)
+            ->first();  
+        return view('resturant.billing.show', $data);
     }
 
     /*
