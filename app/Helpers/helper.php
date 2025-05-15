@@ -52,16 +52,22 @@ function menuList()
         ],
         [
             'sideIcon'   => 'thermometer',
-            'title'      => 'Room Reservation',
+            'title'      => 'Reservation',
             'link'       => '',
             'hasSub'     => true,
-            'permission' => 'Room_Reservation',
+            'permission' => 'Reservation',
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Reservation List',
+                    'title'      => 'Room Reservation',
                     'link'       => route('roomReservation.index'),
-                    'permission' => 'Reservation_List',
+                    'permission' => 'Room_Reservation',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Event Reservation',
+                    'link'       => route('roomReservation.eventOrSeminar'),
+                    'permission' => 'Event_Reservation',
                 ],
                 [
                     'sideIcon'   => '',
@@ -143,7 +149,7 @@ function menuList()
                     'link'       => route('rrs.payroll.index'),
                     'permission' => 'Payroll',
                 ],
-        
+
             ],
 
         ],
@@ -314,6 +320,6 @@ function isOperator()
     if (auth()->user()->responsibility === 'Operator') {
         return true;
     } else {
-        return false;   
+        return false;
     }
 }

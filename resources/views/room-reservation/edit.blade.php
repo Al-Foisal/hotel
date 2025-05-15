@@ -97,9 +97,8 @@
                     <label class="form-label" for="exampleInputEmail1">Booking Type</label>
                     <select id="rBookingType" class="select2">
                         <option value="">select option</option>
-                        <option value="Group" {{$rr->booking_type=='Group'?'selected':''}}>Group</option>
-                        <option value="Business Seminar" {{$rr->booking_type=='Business Seminar'?'selected':''}} selected>Business Seminar</option>
-                        <option value="Single Allocation" {{$rr->booking_type=='Single Allocation'?'selected':''}}>Single Allocation</option>
+                        <option value="Room or Apartment" {{$rr->booking_type=='Room or Apartment'?'selected':''}}>Room or Apartment</option>
+                        <option value="Event or Seminar" {{$rr->booking_type=='Event or Seminar'?'selected':''}}>Event or Seminar</option>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3">

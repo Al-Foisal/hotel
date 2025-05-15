@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(RoomReservationController::class)->prefix('/room-reservation')->name('roomReservation.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/event-or-seminar', 'eventOrSeminar')->name('eventOrSeminar');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/show/{id}', 'show')->name('show');

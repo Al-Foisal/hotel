@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Room or Apartment Reservation')
+@section('title','Event or Seminar Reservation')
 @section('content')
 <!-- Page-Title -->
 <div class="row">
@@ -7,13 +7,13 @@
         <div class="page-title-box">
             <div class="row">
                 <div class="col">
-                    <h4 class="page-title text-capitalize fw-semibold">Room or Apartment Reservation</h4>
+                    <h4 class="page-title text-capitalize fw-semibold">Event or Seminar Reservation</h4>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="{{route('dashboard')}}">{{config('app.name')}}</a>
                         </li>
                         <li class="breadcrumb-item">Reservation</li>
-                        <li class="breadcrumb-item active">Room or Apartment Index</li>
+                        <li class="breadcrumb-item active">Event or Seminar Index</li>
                     </ol>
                 </div><!--end col-->
             </div><!--end row-->
@@ -31,13 +31,13 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <form action="{{route('roomReservation.index')}}" class="me-1">
+                <form action="{{route('roomReservation.eventOrSeminar')}}" class="me-1">
                     <div class="input-group mb-3 table-search-box">
                         <input type="text" class="form-control" placeholder="Search" name="q" value="{{request()->q??''}}">
                         <button class="btn btn-secondary" title="Search" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
-                        <a class="btn btn-danger" href="{{route('roomReservation.index')}}" title="Reset">
+                        <a class="btn btn-danger" href="{{route('roomReservation.eventOrSeminar')}}" title="Reset">
                             <i class="fas fa-redo-alt"></i>
                         </a>
                     </div>
@@ -96,7 +96,7 @@
                             <td>{{number_format($item->due)}}</td>
                             <td>
                                 {{$item->created_at->format('d-m-Y h:i:s A')}}, <br>
-                                <b>By: </b>{{ $item->createdBy->name??'Website' }}
+                                <b>By: </b>{{ $item->createdBy->name??'-' }}
                             </td>
                             <td>
                                 <a href="{{route('roomReservation.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <a href="{{route('roomReservation.show',$item->id)}}" class="btn btn-info btn-sm mb-1">Show</a><br>

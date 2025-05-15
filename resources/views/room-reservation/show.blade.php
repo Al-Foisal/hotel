@@ -318,7 +318,7 @@
                                                     <i class="fab fa-paypal"></i> Discount type
                                                 </h6>
                                                 <p class="font-14 text-muted ms-3">
-                                                    {{ number_format($item->discount_type) }} BDT
+                                                    {{ $item->discount_type }}
                                                 </p>
                                             </li>
                                             <li class="mb-4">

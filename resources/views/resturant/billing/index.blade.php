@@ -85,9 +85,9 @@
                                 <a href="{{ route('resturantBilling.show', $billing->id) }}" class="btn btn-info btn-sm" title="View">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('resturantBilling.edit', $billing->id) }}" class="btn btn-warning btn-sm" title="Edit">
+                                <!-- <a href="{{ route('resturantBilling.edit', $billing->id) }}" class="btn btn-warning btn-sm" title="Edit">
                                     <i class="fas fa-edit"></i>
-                                </a>
+                                </a> -->
                                 <form action="{{ route('resturantBilling.delete', $billing->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure?')">
