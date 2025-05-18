@@ -13,16 +13,10 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_category_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('supplier_id');
-            $table->date('expiry_date')->nullable();
-            $table->integer('quantity')->unsigned();
-            $table->decimal('unit_price', 10, 2);
-            $table->decimal('average_price', 10, 2);
-            $table->decimal('last_purchase_price', 10, 2);
-            $table->integer('status');
-            $table->unsignedBigInteger('owner_id');
+            $table->integer('suplier_id')->nullable();
+            $table->unsignedBigInteger('quantity');
+            $table->date('expired_date');
             $table->timestamps();
         });
     }
