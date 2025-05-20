@@ -9,27 +9,26 @@
 </style>
 @endsection
 @section('content')
-<div class="page-title">
-    <div class="row">
-        <div class="col-sm-6">
-            <h3>Purchase details</h3>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ route('dashboard') }}">
-                        <i data-feather="home"></i>
-                    </a>
-                </li>
-
-                <li class="breadcrumb-item ">Purchase</li>
-                <li class="breadcrumb-item ">Details</li>
-
-
-            </ol>
-        </div>
-    </div>
-</div>
+@section('content')
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="row">
+                <div class="col">
+                    <h4 class="page-title text-capitalize fw-semibold">Purchase Details</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{route('dashboard')}}">{{config('app.name')}}</a>
+                        </li>
+                        <li class="breadcrumb-item">Purchase</li>
+                        <li class="breadcrumb-item active">Details</li>
+                    </ol>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
 <div class="row">
 
 

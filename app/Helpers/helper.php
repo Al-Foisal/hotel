@@ -239,8 +239,8 @@ function menuList()
                 [
                     'sideIcon'   => '',
                     'title'      => 'Stock',
-                    'link'       => '',
-                    'permission' => 'Bed_Type',
+                    'link'       => route('stock.index'),
+                    'permission' => 'Stock',
                 ],
             ],
 

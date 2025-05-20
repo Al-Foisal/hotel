@@ -26,6 +26,7 @@ use App\Http\Controllers\ResturantBillingController;
 use App\Http\Controllers\ResturantMenuItemCategoryController;
 use App\Http\Controllers\ResturantMenuItemController;
 use App\Http\Controllers\ResturantTableSetupController;
+use App\Http\Controllers\StockController;
 
 Route::controller(AuthController::class)->middleware('guest')->group(function () {
     Route::get('/', 'login')->name('login');
@@ -133,6 +134,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(StockController::class)->prefix('/stock')->name('stock.')->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 
     Route::controller(ProductController::class)->prefix('/product')->name('product.')->group(function () {
