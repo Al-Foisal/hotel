@@ -126,4 +126,10 @@ class PurchaseController extends Controller
             return back()->withSuccess($th->getMessage());
         }
     }
+
+    public function show($id)
+    {
+        $data = Purchase::with(['itemDetails.product', 'supplier'])->findOrFail($id);
+        return view('quick-purchase.show', compact('data'));
+    }
 }
