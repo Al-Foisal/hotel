@@ -16,7 +16,16 @@ class PurchaseController extends Controller
     //
     public function index(Request $request)
     {
-        return view('quick-purchase.index');
+        $data = [];
+        $search = $request->input('q');
+        $data['purchases'] = Purchase::withCount('itemDetails')
+            ->orWhereAny([
+                'invoice_number',
+            ], 'like', '%' . $search . '%')
+            ->orderBy('created_at', 'desc')
+            ->paginate(50);
+
+        return view('quick-purchase.index', $data);
     }
 
     public function create(Request $request)
@@ -55,7 +64,7 @@ class PurchaseController extends Controller
             }
 
 
-            $invoice->supplier_id        = $request->suplier_id;
+            $invoice->supplier_id        = $request->supplier_id;
             $invoice->invoice_date      = $request->invoice_date;
             $invoice->invoice_number    = $request->invoice_number;
             $invoice->invoice_image     = $invoice_image ?? '';
@@ -89,7 +98,7 @@ class PurchaseController extends Controller
 
                 if ($request->expired_date[$key]) {
                     $stock = Stock::where('product_id', $product)
-                        ->where('suplier_id', $invoice->suplier_id)
+                        ->where('supplier_id', $invoice->supplier_id)
                         ->whereDate('expired_date', $request->expired_date[$key])
                         ->first();
 
@@ -101,7 +110,7 @@ class PurchaseController extends Controller
                         $new_stock                      = new Stock();
                         $new_stock->product_id          = $product;
                         $new_stock->quantity            = $request->quantity[$key] ?? 0;
-                        $new_stock->suplier_id          = $invoice->suplier_id;
+                        $new_stock->supplier_id          = $invoice->supplier_id;
                         $new_stock->expired_date        = $request->expired_date[$key];
                         $new_stock->save();
                     }

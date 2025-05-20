@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->integer('suplier_id')->nullable();
+            $table->integer('supplier_id')->nullable();
             $table->unsignedBigInteger('quantity');
             $table->date('expired_date');
             $table->timestamps();

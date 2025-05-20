@@ -51,8 +51,47 @@
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
-
+                        <tr>
+                            <th>SL</th>
+                            <th>Invoice Number</th>
+                            <th>Supplier</th>
+                            <th>Purchase Date</th>
+                            <th>Total Item</th>
+                            <th>Total Amount</th>
+                            <th>Created By</th>
+                            <th>Created</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
+                    <tbody>
+                        @foreach($purchases as $purchase)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$purchase->invoice_number}}</td>
+                            <td>{{$purchase->supplier->name??'-'}}</td>
+                            <td>{{date('d-m-Y', strtotime($purchase->purchase_date))}}</td>
+                            <td>{{$purchase->item_details_count}}</td>
+                            <td>{{number_format($purchase->total,2)}}</td>
+                            <td>{{$purchase->createdBy->name??'-'}}</td>
+                            <td>{{$purchase->created_at->format('d-m-Y')}}</td>
+                            <td>
+                                <a href="{{route('purchase.show', $purchase->id)}}" class="btn btn-info btn-sm">View</a>
+                                <form action="{{route('purchase.delete', $purchase->id)}}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6">
+                                {{ $purchases->links() }}
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div><!--end card-body-->
