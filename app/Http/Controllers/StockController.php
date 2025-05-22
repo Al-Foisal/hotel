@@ -11,9 +11,20 @@ class StockController extends Controller
     //
     public function index(Request $request)
     {
-        $stocks = Stock::select('product_id', DB::raw('SUM(quantity) as total_quantity'), 'expired_date')
+        $search = $request->input('q');
+        $query = Stock::query();
+        if ($search) {
+            $query->whereHas('product', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $query = $query->select('product_id', DB::raw('SUM(quantity) as total_quantity'), 'expired_date')
             ->groupBy('product_id')
-            ->groupBy('expired_date')
+            ->groupBy('expired_date');
+        $stocks = $query->join('products', 'stocks.product_id', '=', 'products.id')
+            ->orderBy('products.name', 'asc')
+            ->orderBy('expired_date', 'asc')
             ->get();
 
 

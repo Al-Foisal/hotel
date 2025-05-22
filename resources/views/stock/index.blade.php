@@ -23,6 +23,24 @@
 </div><!--end row-->
 <div class="page-content">
     <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
+            <form action="{{route('stock.index')}}" class="me-1">
+                <div class="input-group mb-3 table-search-box">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{request()->q??''}}">
+                    <button class="btn btn-secondary" title="Search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a class="btn btn-danger" href="{{route('stock.index')}}" title="Reset">
+                        <i class="fas fa-redo-alt"></i>
+                    </a>
+                </div>
+            </form>
+
+
+        </div><!--end card-->
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
