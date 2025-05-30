@@ -69,7 +69,9 @@
 
                         <input type="file" class="form-control" name="home_theme">
                         @if($item && $item->home_theme)
-                        <img src="{{asset($item->home_theme??'')}}" style="height: 100px;">
+                        <video controls autoplay loop muted  style="height: 150px;width:250px">
+                            <source src="{{asset($item->home_theme??'')}}" class="img-fluid" alt="Home Theme Video" type="video/mp4">
+                        </video>
                         @endif
                     </div>
                     <div class="col-md-4 mb-3">

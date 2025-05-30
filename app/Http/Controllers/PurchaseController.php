@@ -10,6 +10,7 @@ use App\Models\Supplier;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\PurchaseReturn;
 
 class PurchaseController extends Controller
 {
@@ -131,5 +132,30 @@ class PurchaseController extends Controller
     {
         $data = Purchase::with(['itemDetails.product', 'supplier'])->findOrFail($id);
         return view('quick-purchase.show', compact('data'));
+    }
+
+    public function destroy($id)
+    {
+        $purchase = Purchase::findOrFail($id);
+        $purchase->itemDetails()->delete();
+        $purchase->delete();
+
+        return back()->withSuccess('Purchase deleted successfully');
+    }
+
+    public function indexPurchaseReturn(Request $request)
+    {
+        $data = [];
+        $search = $request->input('q');
+        $data['purchase_returns'] = PurchaseReturn::with(['purchase', 'returnDetails'])
+            ->when($search, function ($query, $search) {
+                $query->whereHas('purchase', function ($q) use ($search) {
+                    $q->where('invoice_number', 'like', '%' . $search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(50);
+
+        return view('quick-purchase.index-return-purchase', $data);
     }
 }

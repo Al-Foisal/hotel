@@ -136,6 +136,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
 
+    Route::controller(PurchaseController::class)->prefix('/purchase-return')->name('purchaseReturn.')->group(function () {
+        Route::get('/', 'indexPurchaseReturn')->name('indexPurchaseReturn');
+        Route::get('/create', 'createPurchaseReturn')->name('create');
+        Route::post('/store', 'storePurchaseReturn')->name('storePurchaseReturn');
+        Route::get('/show/{id}', 'showPurchaseReturn')->name('showPurchaseReturn');
+        Route::post('/delete/{id}', 'deletePurchaseReturn')->name('deletePurchaseReturn');
+    });
+
     Route::controller(StockController::class)->prefix('/stock')->name('stock.')->group(function () {
         Route::get('/', 'index')->name('index');
     });
