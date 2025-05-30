@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('purchase_return_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedDecimal('price');
+            $table->double('price');
             $table->date('expired_date')->nullable();
             $table->unsignedBigInteger('quantity');
-            $table->unsignedDecimal('discount')->nullable();
+            $table->double('discount')->nullable();
             $table->tinyInteger('discount_type')->nullable();
-            $table->unsignedDecimal('total_price');
+            $table->double('total_price');
             $table->timestamps();
         });
     }

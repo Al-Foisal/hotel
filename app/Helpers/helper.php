@@ -225,6 +225,28 @@ function menuList()
 
         [
             'sideIcon'   => 'thermometer',
+            'title'      => 'Account Management',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Account_Management',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Category',
+                    'link'       => route('account.category.index'),
+                    'permission' => 'Category',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Stock',
+                    'link'       => route('stock.index'),
+                    'permission' => 'Stock',
+                ],
+            ],
+
+        ],
+        [
+            'sideIcon'   => 'thermometer',
             'title'      => 'Inventory Management',
             'link'       => '',
             'hasSub'     => true,

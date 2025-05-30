@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountCategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BedTypeController;
 use App\Http\Controllers\CustomerController;
@@ -180,6 +181,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete/{id}', 'delete')->name('delete');
     });
     Route::controller(ResturantTableSetupController::class)->prefix('/resturant/table-setup')->name('resturant.tableSetup.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(AccountCategoryController::class)->prefix('/account/categories')->name('account.category.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');

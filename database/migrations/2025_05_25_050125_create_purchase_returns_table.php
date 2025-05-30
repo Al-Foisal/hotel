@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('suplier_id');
-            $table->unsignedDecimal('total')->nullable();
+            $table->double('total')->nullable();
             $table->float('discount')->nullable();
             $table->tinyInteger('discount_type')->nullable();
             $table->double('subtotal')->nullable();
