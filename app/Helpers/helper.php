@@ -52,16 +52,22 @@ function menuList()
         ],
         [
             'sideIcon'   => 'thermometer',
-            'title'      => 'Room Reservation',
+            'title'      => 'Reservation',
             'link'       => '',
             'hasSub'     => true,
-            'permission' => 'Room_Reservation',
+            'permission' => 'Reservation',
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
-                    'title'      => 'Reservation List',
+                    'title'      => 'Room Reservation',
                     'link'       => route('roomReservation.index'),
-                    'permission' => 'Reservation_List',
+                    'permission' => 'Room_Reservation',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Event Reservation',
+                    'link'       => route('roomReservation.eventOrSeminar'),
+                    'permission' => 'Event_Reservation',
                 ],
                 [
                     'sideIcon'   => '',
@@ -143,11 +149,51 @@ function menuList()
                     'link'       => route('rrs.payroll.index'),
                     'permission' => 'Payroll',
                 ],
-        
+
             ],
 
         ],
 
+        [
+            'sideIcon'   => 'thermometer',
+            'title'      => 'Resturant Management',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Resturant_Management',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Billing Index',
+                    'link'       => route('resturantBilling.index'),
+                    'permission' => 'Resturant_Index',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Billing',
+                    'link'       => route('resturantBilling.create'),
+                    'permission' => 'Resturant_Billing',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Menu Item',
+                    'link'       => route('resturant.menuItem.index'),
+                    'permission' => 'Menu_Item',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Menu Item Category',
+                    'link'       => route('resturant.menuItemCategory.index'),
+                    'permission' => 'Menu_Item_Category',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Table setup',
+                    'link'       => route('resturant.tableSetup.index'),
+                    'permission' => 'Table_setup',
+                ],
+            ],
+
+        ],
         [
             'sideIcon'   => 'thermometer',
             'title'      => 'Inventory Setting',
@@ -158,31 +204,53 @@ function menuList()
                 [
                     'sideIcon'   => '',
                     'title'      => 'Supplier',
-                    'link'       => route('rrs.supplier.index'),
-                    'permission' => 'Room_Type',
-                ],
-                [
-                    'sideIcon'   => '',
-                    'title'      => 'Supplier Payment',
-                    'link'       => route('rrs.supplier-payment.index'),
-                    'permission' => 'Bed_Type',
+                    'link'       => route('is.supplier.index'),
+                    'permission' => 'Supplier',
                 ],
                 [
                     'sideIcon'   => '',
                     'title'      => 'Product Category',
-                    'link'       => route('rrs.product-category.index'),
-                    'permission' => 'Bed_Type',
+                    'link'       => route('is.productCategory.index'),
+                    'permission' => 'Product_Category',
                 ],
                 [
                     'sideIcon'   => '',
                     'title'      => 'Product',
-                    'link'       => route('rrs.product.index'),
-                    'permission' => 'Facility',
+                    'link'       => route('product.index'),
+                    'permission' => 'Product',
                 ],
             ],
 
         ],
 
+        [
+            'sideIcon'   => 'thermometer',
+            'title'      => 'Account Management',
+            'link'       => '',
+            'hasSub'     => true,
+            'permission' => 'Account_Management',
+            'subMenu'    => [
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Voucher',
+                    'link'       => route('account.voucher.index'),
+                    'permission' => 'Voucher',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Category',
+                    'link'       => route('account.category.index'),
+                    'permission' => 'Category',
+                ],
+                [
+                    'sideIcon'   => '',
+                    'title'      => 'Stock',
+                    'link'       => route('stock.index'),
+                    'permission' => 'Stock',
+                ],
+            ],
+
+        ],
         [
             'sideIcon'   => 'thermometer',
             'title'      => 'Inventory Management',
@@ -193,14 +261,14 @@ function menuList()
                 [
                     'sideIcon'   => '',
                     'title'      => 'Purchase',
-                    'link'       => route('rrs.purchase.index'),
-                    'permission' => 'Room_Type',
+                    'link'       => route('purchase.index'),
+                    'permission' => 'Purchase',
                 ],
                 [
                     'sideIcon'   => '',
                     'title'      => 'Stock',
-                    'link'       => route('rrs.stock.index'),
-                    'permission' => 'Bed_Type',
+                    'link'       => route('stock.index'),
+                    'permission' => 'Stock',
                 ],
             ],
 
@@ -280,6 +348,6 @@ function isOperator()
     if (auth()->user()->responsibility === 'Operator') {
         return true;
     } else {
-        return false;   
+        return false;
     }
 }

@@ -97,9 +97,8 @@
                     <label class="form-label" for="exampleInputEmail1">Booking Type</label>
                     <select id="rBookingType" class="select2">
                         <option value="">select option</option>
-                        <option value="Group">Group</option>
-                        <option value="Business Seminar" selected>Business Seminar</option>
-                        <option value="Single Allocation">Single Allocation</option>
+                        <option value="Room or Apartment" selected>Room or Apartment</option>
+                        <option value="Event or Seminar">Event or Seminar</option>
                     </select>
                 </div>
                 <div class="col-md-3 mb-3">

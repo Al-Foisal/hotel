@@ -22,6 +22,10 @@ class RoomOrApartmet extends Model
     {
         return $this->belongsTo(RoomCategory::class);
     }
+    public function floor()
+    {
+        return $this->belongsTo(Floor::class);
+    }
     public function facilities()
     {
         return $this->hasMany(RoomOrApartmentFacility::class, 'room_or_apartment_id', 'id');

@@ -17,8 +17,14 @@ class RoomReservationController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        $data['rr'] = RoomReservation::orderBy('check_in', 'desc')->paginate();
+        $data['rr'] = RoomReservation::orderBy('check_in', 'desc')->where('booking_type','Room or Apartment')->paginate();
         return view('room-reservation.index', $data);
+    }
+    public function eventOrSeminar(Request $request)
+    {
+        $data = [];
+        $data['rr'] = RoomReservation::orderBy('check_in', 'desc')->where('booking_type','Event or Seminar')->paginate();
+        return view('room-reservation.event-or-seminar', $data);
     }
     public function create()
     {
@@ -133,6 +139,13 @@ class RoomReservationController extends Controller
                 'message' => $th->getMessage()
             ]);
         }
+    }
+
+    public function show($id)
+    {
+        $item = RoomReservation::findOrFail($id);
+
+        return view('room-reservation.show', compact('item'));
     }
 
     public function edit($id)

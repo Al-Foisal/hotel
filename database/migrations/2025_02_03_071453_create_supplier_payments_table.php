@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('supplier_payments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('supplier_id');
             $table->enum('payment_type', ['Cash', 'Bank Transfer', 'Mobile Banking', 'Other']);
             $table->string('account_name', 255);
-            $table->string('branch', 255);
+            $table->string('branch', 255)->nullable();
             $table->string('account_number', 50);
             $table->timestamps();
         });

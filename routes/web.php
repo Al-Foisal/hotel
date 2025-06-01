@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AccountCategoryController;
+use App\Http\Controllers\AccountVoucherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BedTypeController;
 use App\Http\Controllers\CustomerController;
@@ -8,21 +10,25 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RoomOrApartmentController;
 use App\Http\Controllers\RoomReservationController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\SupplierPaymentController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\StockController;
 use App\Http\Controllers\SystemUserController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\HrController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RoomCategoryController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\WebsiteManagementController;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResturantBillingController;
+use App\Http\Controllers\ResturantMenuItemCategoryController;
+use App\Http\Controllers\ResturantMenuItemController;
+use App\Http\Controllers\ResturantTableSetupController;
+use App\Http\Controllers\StockController;
 
 Route::controller(AuthController::class)->middleware('guest')->group(function () {
     Route::get('/', 'login')->name('login');
@@ -52,30 +58,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
-    });
-
-    Route::controller(SupplierController::class)->prefix('/rrs/supplier')->name('rrs.supplier.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(SupplierPaymentController::class)->prefix('/rrs/supplier-payment')->name('rrs.supplier-payment.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(ProductCategoryController::class)->prefix('/rrs/product-category')->name('rrs.product-category.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(ProductController::class)->prefix('/rrs/product')->name('rrs.product.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(PurchaseController::class)->prefix('/rrs/purchase')->name('rrs.purchase.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-
-    Route::controller(StockController::class)->prefix('/rrs/stock')->name('rrs.stock.')->group(function () {
-        Route::get('/', 'index')->name('index');
     });
 
     Route::controller(SystemUserController::class)->prefix('/system-user')->name('systemUser.')->group(function () {
@@ -120,8 +102,10 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(RoomReservationController::class)->prefix('/room-reservation')->name('roomReservation.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/event-or-seminar', 'eventOrSeminar')->name('eventOrSeminar');
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
@@ -130,7 +114,94 @@ Route::middleware('auth')->group(function () {
         Route::post('/get-roa-by-type', 'getROAByType')->name('getROAByType');
         Route::post('/get-single-room-details', 'getSingleRoomDetails')->name('getSingleRoomDetails');
     });
+    Route::controller(SupplierController::class)->prefix('/is/supplier')->name('is.supplier.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ProductCategoryController::class)->prefix('/is/product-category')->name('is.productCategory.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
 
+    Route::controller(PurchaseController::class)->prefix('/purchase')->name('purchase.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(PurchaseController::class)->prefix('/purchase-return')->name('purchaseReturn.')->group(function () {
+        Route::get('/', 'indexPurchaseReturn')->name('indexPurchaseReturn');
+        Route::get('/create', 'createPurchaseReturn')->name('create');
+        Route::post('/store', 'storePurchaseReturn')->name('storePurchaseReturn');
+        Route::get('/show/{id}', 'showPurchaseReturn')->name('showPurchaseReturn');
+        Route::post('/delete/{id}', 'deletePurchaseReturn')->name('deletePurchaseReturn');
+    });
+
+    Route::controller(StockController::class)->prefix('/stock')->name('stock.')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
+    Route::controller(ProductController::class)->prefix('/product')->name('product.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ResturantBillingController::class)->prefix('/resturant-billing')->name('resturantBilling.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+        Route::post('/get-menu-item', 'getMenuItem')->name('getMenuItem');
+    });
+    Route::controller(ResturantMenuItemController::class)->prefix('/resturant/menu-item')->name('resturant.menuItem.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ResturantMenuItemCategoryController::class)->prefix('/resturant/menu-item-category')->name('resturant.menuItemCategory.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(ResturantTableSetupController::class)->prefix('/resturant/table-setup')->name('resturant.tableSetup.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(AccountVoucherController::class)->prefix('/account/voucher')->name('account.voucher.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+
+    Route::controller(AccountCategoryController::class)->prefix('/account/categories')->name('account.category.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
 
     //----------- HR (start)-------------------
 
@@ -233,3 +304,19 @@ Route::middleware('auth')->group(function () {
         return to_route('login');
     })->name('logout');
 });
+
+Route::get('/get-product-details', function (Request $request) {
+    $product = Product::find($request->id);
+
+    if ($product) {
+        return response()->json([
+            'success' => true,
+            'data' => $product,
+        ]);
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Product not found',
+        ], 404);
+    }
+})->name('getProductDetails');

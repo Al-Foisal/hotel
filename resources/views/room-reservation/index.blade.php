@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Room Reservation')
+@section('title','Room or Apartment Reservation')
 @section('content')
 <!-- Page-Title -->
 <div class="row">
@@ -7,13 +7,13 @@
         <div class="page-title-box">
             <div class="row">
                 <div class="col">
-                    <h4 class="page-title text-capitalize fw-semibold">Room Reservation</h4>
+                    <h4 class="page-title text-capitalize fw-semibold">Room or Apartment Reservation</h4>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="{{route('dashboard')}}">{{config('app.name')}}</a>
                         </li>
-                        <li class="breadcrumb-item">Room Reservation</li>
-                        <li class="breadcrumb-item active">Index</li>
+                        <li class="breadcrumb-item">Reservation</li>
+                        <li class="breadcrumb-item active">Room or Apartment Index</li>
                     </ol>
                 </div><!--end col-->
             </div><!--end row-->
@@ -27,7 +27,7 @@
         <div class="card-header row">
             <div class="col-md-6">
                 <a href="{{route('roomReservation.create')}}" class="text-capitalize btn btn-secondary btn-square btn-outline-dashed">
-                    Create new Room or Apartment
+                    Create new Reservation
                 </a>
             </div>
             <div class="col-md-6">
@@ -54,6 +54,7 @@
                     <thead>
                         <tr>
                             <th>Sl</th>
+                            <th>Others Info</th>
                             <th>Reservation Duration</th>
                             <th>Room Info</th>
                             <th>Persons</th>
@@ -72,6 +73,11 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>
+                                <b>Invoice: </b>{{ $item->invoice_number}}<br>
+                                <b>Arival From: </b> {{ $item->arival_from}}<br>
+                                <b>Purpose: </b> {{ $item->purpose_of_visit}}<br>
+                            </td>
+                            <td>
                                 {!!$item->check_in->format('d-m-Y').' to <br>'.$item->check_out->format('d-m-Y')!!}
                             </td>
                             <td>
@@ -88,9 +94,12 @@
                             <td>{{number_format($item->subtotal)}}</td>
                             <td>{{number_format($item->paid_amount)}}</td>
                             <td>{{number_format($item->due)}}</td>
-                            <td>{{$item->created_at->format('d-m-Y h:i:s A')}}</td>
                             <td>
-                                <a href="{{route('roomReservation.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <br>
+                                {{$item->created_at->format('d-m-Y h:i:s A')}}, <br>
+                                <b>By: </b>{{ $item->createdBy->name??'Website' }}
+                            </td>
+                            <td>
+                                <a href="{{route('roomReservation.edit',$item->id)}}" class="btn btn-primary btn-sm mb-1">Edit</a> <a href="{{route('roomReservation.show',$item->id)}}" class="btn btn-info btn-sm mb-1">Show</a><br>
                                 {{--<form action="{{route('roomReservation.status',$item->id)}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-{{$item->status==1?'danger':'success'}} btn-sm mb-1" onclick="return confirm('Are you sure want {{$item->status==1?'Inactive':'Active'}} this item?')">{{$item->status==1?'Inactive':'Active'}}</button>
