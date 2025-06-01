@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountCategoryController;
+use App\Http\Controllers\AccountVoucherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BedTypeController;
 use App\Http\Controllers\CustomerController;
@@ -183,6 +184,14 @@ Route::middleware('auth')->group(function () {
     Route::controller(ResturantTableSetupController::class)->prefix('/resturant/table-setup')->name('resturant.tableSetup.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
+    });
+    Route::controller(AccountVoucherController::class)->prefix('/account/voucher')->name('account.voucher.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
         Route::post('/delete/{id}', 'delete')->name('delete');
     });

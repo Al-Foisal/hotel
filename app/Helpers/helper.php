@@ -232,6 +232,12 @@ function menuList()
             'subMenu'    => [
                 [
                     'sideIcon'   => '',
+                    'title'      => 'Voucher',
+                    'link'       => route('account.voucher.index'),
+                    'permission' => 'Voucher',
+                ],
+                [
+                    'sideIcon'   => '',
                     'title'      => 'Category',
                     'link'       => route('account.category.index'),
                     'permission' => 'Category',
