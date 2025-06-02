@@ -15,7 +15,7 @@ class DashboardController extends Controller
 {
     public function welcome()
     {
-        return view('welcome');
+        return view('welcome',['user' => auth()->user()]);
     }
     public function dashboard()
     {

@@ -1,6 +1,6 @@
 <!-- LOGO -->
 <div class="brand">
-    <a href="index.html" class="logo">
+    <a href="{{ route('dashboard') }}" class="logo">
         <span>
             <img src="{{asset('images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
         </span>
