@@ -77,5 +77,25 @@ class BedTypeController extends Controller
             return back()->withToastError($th->getMessage());
         }
     }
+
+    public function delete($id)
+    {
+        DB::beginTransaction();
+
+        try {
+            $item = BedType::where('id', $id)->first();
+            if (!$item) {
+                return back()->withToastError('No data found');
+            }
+
+            $item->delete();
+
+            DB::commit();
+            return back()->withToastSuccess('Data deleted successfully');
+        } catch (Exception $th) {
+            DB::rollBack();
+            return back()->withToastError($th->getMessage());
+        }
+    }
     
 }

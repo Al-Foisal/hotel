@@ -52,7 +52,7 @@
                             <th>SL.</th>
                             <th>Icon [ <a href="https://fontawesome.com/v5/search">Goto Icon Store</a> ]</th>
                             <th>Facility</th>
-                            <th class="d-none">Action</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,10 +61,10 @@
                             <td>{{$loop->iteration}}</td>
                             <td><i class="{{$item->icon}}"></i> [{{$item->icon}}]</td>
                             <td>{{$item->name}}</td>
-                            <td class="d-none">
+                            <td>
                                 <div class="d-flex justify-content-start">
                                     <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal{{$item->id}}">Edit</button>
-                                    <form action="" method="post">
+                                    <form action="{{route('rrs.facility.delete',$item->id)}}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want delete this item?')">Delete</button>
                                     </form>

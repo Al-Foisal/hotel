@@ -143,12 +143,12 @@ function menuList()
                     'link'       => route('rrs.emp.index'),
                     'permission' => 'Employee',
                 ],
-                [
-                    'sideIcon'   => '',
-                    'title'      => 'Payroll',
-                    'link'       => route('rrs.payroll.index'),
-                    'permission' => 'Payroll',
-                ],
+                // [
+                //     'sideIcon'   => '',
+                //     'title'      => 'Payroll',
+                //     'link'       => route('rrs.payroll.index'),
+                //     'permission' => 'Payroll',
+                // ],
 
             ],
 

@@ -46,11 +46,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
     Route::controller(BedTypeController::class)->prefix('/rrs/bed-types')->name('rrs.bedType.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
 
     Route::controller(FloorController::class)->prefix('/rrs/floors')->name('rrs.floor.')->group(function () {
@@ -73,6 +75,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::post('/delete/{id}', 'delete')->name('delete');
     });
     Route::controller(RoomOrApartmentController::class)->prefix('/rrs/room-or-apartment')->name('rrs.roa.')->group(function () {
         Route::get('/', 'index')->name('index');
